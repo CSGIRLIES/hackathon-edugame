@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../contexts/UserContext';
-import Animal from '../components/Animal';
+import { useUser } from '../contexts/UserContext.tsx';
+import Animal from '../components/Animal.tsx';
 
 const DashboardPage: React.FC = () => {
   const { user } = useUser();

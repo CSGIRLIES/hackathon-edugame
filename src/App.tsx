@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AuthPage from './pages/AuthPage';
-import OnboardingPage from './pages/OnboardingPage';
-import DashboardPage from './pages/DashboardPage';
-import QuizPage from './pages/QuizPage';
-import LearningPage from './pages/LearningPage';
+import AuthPage from './pages/AuthPage.tsx';
+import OnboardingPage from './pages/OnboardingPage.tsx';
+import DashboardPage from './pages/DashboardPage.tsx';
+import QuizPage from './pages/QuizPage.tsx';
+import LearningPage from './pages/LearningPage.tsx';
 
 function App() {
   return (

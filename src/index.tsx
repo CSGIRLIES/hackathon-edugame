@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import { UserProvider } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext.tsx';
 import './index.css';
 
 const root = ReactDOM.createRoot(
