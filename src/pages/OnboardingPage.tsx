@@ -11,14 +11,24 @@ const OnboardingPage: React.FC = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
 
-  const animalOptions = ['cat', 'dragon', 'otter', 'penguin'];
-  const colorOptions = ['blue', 'green', 'purple', 'red'];
+  const animalOptions = [
+    { id: 'cat', label: 'Chaton ailé', hint: 'Curieux, joueur, créatif' },
+    { id: 'dragon', label: 'Mini-dragon', hint: 'Brave, puissant, passionné' },
+    { id: 'otter', label: 'Loutre érudite', hint: 'Calme, concentrée, studieuse' },
+    { id: 'penguin', label: 'Pingouin cosmique', hint: 'Fun, chill, régulier' },
+  ];
+
+  const colorOptions = [
+    { id: '#38bdf8', label: 'Bleu galaxie' },
+    { id: '#a855ff', label: 'Violet magique' },
+    { id: '#f97316', label: 'Orange énergie' },
+    { id: '#22c55e', label: 'Vert focus' },
+  ];
 
   const handleNext = () => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      // Finish onboarding
       const newUser = {
         id: Date.now().toString(),
         name: userName,
@@ -37,64 +47,157 @@ const OnboardingPage: React.FC = () => {
     if (step > 0) setStep(step - 1);
   };
 
+  const canContinue =
+    (step === 0 && !!userName.trim()) ||
+    (step === 1 && !!animalType) ||
+    (step === 2 && !!animalColor) ||
+    (step === 3 && !!animalName.trim());
+
+  const stepTitle = [
+    'D’abord, on fait connaissance',
+    'Choisis ton compagnon magique',
+    'Choisis sa couleur d’aura',
+    'Donne-lui un nom',
+  ][step];
+
+  const stepSubtitle = [
+    'Comment veux-tu que ton compagnon t’appelle ?',
+    'Lequel te ressemble le plus pour apprendre ?',
+    'Quelle couleur te motive le plus pour travailler ?',
+    'Un nom cute, drôle ou badass, à toi de choisir ✨',
+  ][step];
+
   return (
-    <div style={{ textAlign: 'center', padding: '50px' }}>
-      <h1>Welcome to CSGIRLIES!</h1>
-      {step === 0 && (
-        <>
-          <h2>What is your name?</h2>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="Enter your name"
-            required
-          />
-        </>
-      )}
-      {step === 1 && (
-        <>
-          <h2>Choose your animal companion</h2>
-          {animalOptions.map((animal) => (
-            <button key={animal} onClick={() => setAnimalType(animal)}>
-              {animal}
+    <div className="page">
+      <header className="page-header">
+        <h1 className="page-title">Crée ton duo légendaire ✨</h1>
+        <p className="page-subtitle">
+          En quelques étapes, tu adoptes un bébé animal magique qui va réviser, jouer et progresser avec toi.
+        </p>
+      </header>
+
+      <main>
+        <section className="card onboarding-card">
+          <div className="card-header">
+            <h2 className="card-title">{stepTitle}</h2>
+            <p className="card-subtitle">{stepSubtitle}</p>
+          </div>
+
+          {step === 0 && (
+            <>
+              <div className="input-group">
+                <label className="input-label" htmlFor="name">
+                  Ton prénom ou pseudo
+                </label>
+                <input
+                  id="name"
+                  className="input"
+                  type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  placeholder="Ex : Lina, ZoéCode, AstroGirl..."
+                  required
+                />
+                <p className="helper-text">
+                  C'est comme ça que ton compagnon t'appellera.
+                </p>
+              </div>
+            </>
+          )}
+
+          {step === 1 && (
+            <>
+              <div className="chip-row">
+                {animalOptions.map((animal) => (
+                  <button
+                    key={animal.id}
+                    type="button"
+                    className={
+                      'chip' + (animalType === animal.id ? ' chip--selected' : '')
+                    }
+                    onClick={() => setAnimalType(animal.id)}
+                  >
+                    <div style={{ fontWeight: 600 }}>{animal.label}</div>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.8 }}>{animal.hint}</div>
+                  </button>
+                ))}
+              </div>
+              <p className="helper-text" style={{ marginTop: '0.75rem' }}>
+                Tu pourras toujours en adopter d'autres plus tard dans la version complète.
+              </p>
+            </>
+          )}
+
+          {step === 2 && (
+            <>
+              <div className="chip-row">
+                {colorOptions.map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    className={'chip' + (animalColor === c.id ? ' chip--selected' : '')}
+                    onClick={() => setAnimalColor(c.id)}
+                    style={{
+                      borderColor: animalColor === c.id ? 'transparent' : undefined,
+                      background:
+                        animalColor === c.id
+                          ? `linear-gradient(135deg, ${c.id}, #f472b6)`
+                          : undefined,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 14,
+                        height: 14,
+                        borderRadius: '999px',
+                        background: c.id,
+                        display: 'inline-block',
+                        marginRight: 6,
+                      }}
+                    />
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 3 && (
+            <>
+              <div className="input-group">
+                <label className="input-label" htmlFor="animalName">
+                  Nom de ton compagnon
+                </label>
+                <input
+                  id="animalName"
+                  className="input"
+                  type="text"
+                  value={animalName}
+                  onChange={(e) => setAnimalName(e.target.value)}
+                  placeholder="Ex : Nova, Pixel, Draco, Mimi..."
+                  required
+                />
+              </div>
+            </>
+          )}
+
+          <div className="btn-row" style={{ marginTop: '1.5rem' }}>
+            {step > 0 && (
+              <button type="button" className="btn btn-secondary" onClick={handleBack}>
+                Retour
+              </button>
+            )}
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleNext}
+              disabled={!canContinue}
+            >
+              {step === 3 ? 'Terminer et rencontrer mon compagnon' : 'Continuer'}
             </button>
-          ))}
-        </>
-      )}
-      {step === 2 && (
-        <>
-          <h2>Choose a color for your animal</h2>
-          {colorOptions.map((color) => (
-            <button key={color} onClick={() => setAnimalColor(color)}>
-              {color}
-            </button>
-          ))}
-        </>
-      )}
-      {step === 3 && (
-        <>
-          <h2>Name your companion:</h2>
-          <input
-            type="text"
-            value={animalName}
-            onChange={(e) => setAnimalName(e.target.value)}
-            placeholder="Enter animal name"
-            required
-          />
-        </>
-      )}
-      <div>
-        {step > 0 && <button onClick={handleBack}>Back</button>}
-        <button onClick={handleNext} disabled={
-          (step === 0 && !userName) ||
-          (step === 1 && !animalType) ||
-          (step === 2 && !animalColor) ||
-          (step === 3 && !animalName)
-        }>
-          {step === 3 ? 'Finish' : 'Next'}
-        </button>
-      </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
