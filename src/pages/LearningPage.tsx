@@ -25,6 +25,8 @@ const LearningPage: React.FC = () => {
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [sessionXP, setSessionXP] = useState(0);
 
+  const [checkedTasks, setCheckedTasks] = useState<boolean[]>([false, false, false]);
+
   const { user, updateXP, updateStreak } = useUser();
   const navigate = useNavigate();
 
@@ -49,9 +51,6 @@ const LearningPage: React.FC = () => {
       setIsWorking(true);
       setIsPaused(false);
       setTimeLeft(25 * 60);
-      alert(
-        `Plan d'apprentissage pour ${topic}:\n1. Relire le cours calmement\n2. Faire 2-3 exercices\n3. Noter ce que tu dois revoir au prochain cycle`
-      );
     }
   };
 
@@ -154,15 +153,15 @@ const LearningPage: React.FC = () => {
 
       <main className="layout-grid">
         <section className="card learning-card">
-          <div className="card-header">
-            <h2 className="card-title">{t('learning.prepareTitle')}</h2>
-            <p className="card-subtitle">
-              {t('learning.prepareSubtitle')}
-            </p>
-          </div>
-
           {!isWorking && (
             <>
+              <div className="card-header">
+                <h2 className="card-title">{t('learning.prepareTitle')}</h2>
+                <p className="card-subtitle">
+                  {t('learning.prepareSubtitle')}
+                </p>
+              </div>
+
               <div className="input-group">
                 <label className="input-label" htmlFor="topic">
                   {t('learning.topicLabel')}
@@ -223,6 +222,65 @@ const LearningPage: React.FC = () => {
                 <div className="timer-display">{formatTime(timeLeft)}</div>
                 <div className="progress-track" style={{ marginTop: '0.75rem' }}>
                   <div className="progress-bar" style={{ width: `${progress}%` }} />
+                </div>
+              </div>
+
+              <div style={{ 
+                background: 'rgba(56, 189, 248, 0.1)', 
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+                marginBottom: '1.25rem',
+                textAlign: 'left'
+              }}>
+                <h3 style={{ 
+                  fontSize: '0.9rem', 
+                  color: 'var(--accent-blue)', 
+                  marginBottom: '0.75rem',
+                  fontWeight: 600
+                }}>
+                  📚 Plan d'apprentissage
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {[
+                    'Relire le cours calmement',
+                    'Faire 2-3 exercices',
+                    'Noter ce que tu dois revoir au prochain cycle'
+                  ].map((task, index) => (
+                    <label 
+                      key={index}
+                      style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '0.5rem',
+                        cursor: 'pointer',
+                        fontSize: '0.85rem',
+                        transition: 'opacity 0.2s ease'
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checkedTasks[index]}
+                        onChange={() => {
+                          const newChecked = [...checkedTasks];
+                          newChecked[index] = !newChecked[index];
+                          setCheckedTasks(newChecked);
+                        }}
+                        style={{ 
+                          width: '16px', 
+                          height: '16px',
+                          cursor: 'pointer',
+                          accentColor: 'var(--accent-blue)'
+                        }}
+                      />
+                      <span style={{ 
+                        textDecoration: checkedTasks[index] ? 'line-through' : 'none',
+                        opacity: checkedTasks[index] ? 0.6 : 1
+                      }}>
+                        {task}
+                      </span>
+                    </label>
+                  ))}
                 </div>
               </div>
 
