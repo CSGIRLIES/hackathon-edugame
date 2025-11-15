@@ -1,6 +1,6 @@
 :root {
-  --bg-gradient: radial-gradient(circle at top, #ffe6ff 0%, #f5f0ff 40%, #0b1020 100%);
-  --card-bg: rgba(14, 18, 42, 0.9);
+  --bg-gradient: radial-gradient(circle at top, #4c1d95 0%, #2e1065 40%, #020617 100%);
+  --card-bg: rgba(10, 12, 32, 0.94);
   --card-border: rgba(255, 255, 255, 0.08);
   --accent-pink: #ff6ad5;
   --accent-purple: #a855ff;

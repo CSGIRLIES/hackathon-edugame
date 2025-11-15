@@ -14,40 +14,56 @@ const QuizPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [started, setStarted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const { updateXP } = useUser();
   const navigate = useNavigate();
 
-  const generateQuestions = (topicText: string): Question[] => {
-    return [
-      {
-        question: `Quel est l'objectif principal de ${topicText} ?`,
-        options: ['Comprendre', 'Mémoriser', 'Réciter', 'Copier'],
-        correct: 0,
-      },
-      {
-        question: `Dans ${topicText}, qu'est-ce qui t'embête le plus ?`,
-        options: ['Les définitions', 'Les exercices', 'Les exemples', 'Rien du tout'],
-        correct: 1,
-      },
-      {
-        question: `Comment pourrais-tu vérifier que tu as bien compris ${topicText} ?`,
-        options: ["Expliquer à quelqu'un", 'Relire en boucle', 'Tout surligner', 'Abandonner'],
-        correct: 0,
-      },
-    ];
-  };
+  const handleStartQuiz = async () => {
+    const trimmed = topic.trim();
+    if (!trimmed) return;
 
-  const handleStartQuiz = () => {
-    if (topic.trim()) {
-      setQuestions(generateQuestions(topic.trim()));
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch('http://localhost:4000/api/quiz/from-text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ topic: trimmed, numQuestions: 3 }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Erreur serveur');
+      }
+
+      const data = await res.json();
+      const q: Question[] = data.questions || [];
+
+      if (!q.length) {
+        throw new Error("L'IA n'a pas réussi à générer des questions.");
+      }
+
+      setQuestions(q);
       setStarted(true);
       setScore(0);
       setCurrentQuestion(0);
+    } catch (e: any) {
+      console.error('[QuizPage] Failed to start quiz', e);
+      setError(e.message || 'Impossible de générer le quiz, réessaie plus tard.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleAnswer = (index: number) => {
-    const isCorrect = index === questions[currentQuestion].correct;
+    const current = questions[currentQuestion];
+    const isCorrect = index === current.correct;
+
     if (isCorrect) {
       setScore((prev) => prev + 20);
     }
@@ -93,6 +109,11 @@ const QuizPage: React.FC = () => {
                 placeholder="Ex : Les équations du 1er degré, ou copier/colle un paragraphe de ton cours"
                 required
               />
+              {error && (
+                <p className="helper-text" style={{ color: '#fb7185' }}>
+                  {error}
+                </p>
+              )}
             </div>
 
             <div className="btn-row" style={{ marginTop: '1.25rem' }}>
@@ -100,9 +121,9 @@ const QuizPage: React.FC = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleStartQuiz}
-                disabled={!topic.trim()}
+                disabled={!topic.trim() || isLoading}
               >
-                Générer des questions
+                {isLoading ? 'Génération en cours...' : 'Générer des questions'}
               </button>
               <button
                 type="button"

@@ -1,0 +1,25 @@
+# Node / frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+build/
+dist/
+coverage/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Env & secrets
+.env
+backend/.env
+
+# Backend node modules
+backend/node_modules/
+
+# Misc
+*.log

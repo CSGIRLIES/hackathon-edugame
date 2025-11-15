@@ -1,0 +1,18 @@
+{
+  "name": "hackathon-edugame-backend",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "file-type": "^21.1.0",
+    "mammoth": "^1.11.0",
+    "node-fetch": "^3.3.2",
+    "pdf-parse": "^2.4.5",
+    "tesseract.js": "^6.0.1"
+  }
+}
