@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface AnimalProps {
   type: string;
@@ -8,51 +9,23 @@ interface AnimalProps {
   context?: 'dashboard' | 'learning' | 'break' | 'quiz';
 }
 
-const dashboardMessages = [
-  "Je suis prêt·e à apprendre avec toi ✨",
-  "On continue notre aventure magique aujourd'hui ?",
-  "Chaque petite session = un pas vers ton super pouvoir préféré.",
-  "Si tu veux, on se fait un mini-quiz après ta révision !",
-];
-
-const learningMessages = [
-  "Chut… mode focus activé. On va tout déchirer 💫",
-  "Je retiens le cours avec toi, tu n'es pas seul·e !",
-  "Pense à respirer, relire, et surligner l'essentiel.",
-  "Ton cerveau est en train de se muscler très fort là 🧠✨",
-];
-
-const breakMessages = [
-  "Stretch break ! Étire les bras, roule les épaules 🌈",
-  "Mini danse ? Mini marche ? On bouge un peu le corps !",
-  "Bois un verre d'eau et reviens, je t'attends 💧",
-];
-
-const quizMessages = [
-  "Ne panique pas, on réfléchit ensemble 🧩",
-  "Lis bien chaque proposition, tu gères.",
-  "Même si tu te trompes, on apprend quelque chose.",
-  "Let’s go, montre-moi ce que tu sais déjà !",
-];
-
-function pickMessages(context?: AnimalProps['context']) {
-  switch (context) {
-    case 'learning':
-      return learningMessages;
-    case 'break':
-      return breakMessages;
-    case 'quiz':
-      return quizMessages;
-    case 'dashboard':
-    default:
-      return dashboardMessages;
-  }
-}
-
 const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = 'dashboard' }) => {
+  const { t } = useTranslation();
   const [messageIndex, setMessageIndex] = useState(0);
 
-  const messages = useMemo(() => pickMessages(context), [context]);
+  const messages = useMemo(() => {
+    switch (context) {
+      case 'learning':
+        return t('animal.contextLearning', { returnObjects: true }) as string[];
+      case 'break':
+        return t('animal.contextBreak', { returnObjects: true }) as string[];
+      case 'quiz':
+        return t('animal.contextQuiz', { returnObjects: true }) as string[];
+      case 'dashboard':
+      default:
+        return t('animal.contextDashboard', { returnObjects: true }) as string[];
+    }
+  }, [context, t]);
 
   useEffect(() => {
     // cycle messages every 12 seconds like a soft talking pet
