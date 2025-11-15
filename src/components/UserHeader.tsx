@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../contexts/UserContext.tsx';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ const UserHeader: React.FC = () => {
   const { t } = useTranslation();
   const { user, setUser } = useUser();
   const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSignOut = async () => {
     const confirm = window.confirm(t('auth.signOutConfirm'));
@@ -19,20 +21,57 @@ const UserHeader: React.FC = () => {
     }
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Fermer le dropdown si on clique à l'extérieur
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <header className="app-header">
       <div className="header-content">
-        <LanguageSelector />
         {user && (
-          <div className="user-menu">
-            <span className="user-name">👤 {user.name}</span>
+          <div className="user-menu" ref={dropdownRef}>
             <button
               type="button"
-              className="btn btn-secondary btn-sm"
-              onClick={handleSignOut}
+              className="user-avatar-btn"
+              onClick={toggleDropdown}
+              aria-label="User menu"
             >
-              {t('auth.signOut')}
+              👤
             </button>
+            {isDropdownOpen && (
+              <div className="user-dropdown">
+                <div className="user-dropdown-name">
+                  <strong>{user.name}</strong>
+                </div>
+                <div className="user-dropdown-section">
+                  <LanguageSelector />
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={handleSignOut}
+                >
+                  {t('auth.signOut')}
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

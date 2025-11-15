@@ -20,7 +20,9 @@
     "loggingIn": "جارٍ تسجيل الدخول...",
     "signingUp": "جارٍ إنشاء الحساب...",
     "authError": "المصادقة غير مكونة (Supabase مفقود).",
-    "errorOccurred": "حدث خطأ."
+    "errorOccurred": "حدث خطأ.",
+    "signOut": "تسجيل الخروج",
+    "signOutConfirm": "هل أنت متأكد من أنك تريد تسجيل الخروج؟"
   },
   "onboarding": {
     "title": "اصنع ثنائيك الأسطوري ✨",

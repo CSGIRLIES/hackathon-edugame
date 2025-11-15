@@ -20,7 +20,9 @@
     "loggingIn": "Connexion...",
     "signingUp": "Création...",
     "authError": "L'authentification n'est pas configurée (Supabase manquant).",
-    "errorOccurred": "Une erreur est survenue."
+    "errorOccurred": "Une erreur est survenue.",
+    "signOut": "Se déconnecter",
+    "signOutConfirm": "Es-tu sûr(e) de vouloir te déconnecter ?"
   },
   "onboarding": {
     "title": "Crée ton duo légendaire ✨",

@@ -20,7 +20,9 @@
     "loggingIn": "Logging in...",
     "signingUp": "Creating account...",
     "authError": "Authentication is not configured (Supabase missing).",
-    "errorOccurred": "An error occurred."
+    "errorOccurred": "An error occurred.",
+    "signOut": "Log Out",
+    "signOutConfirm": "Are you sure you want to log out?"
   },
   "onboarding": {
     "title": "Create your legendary duo ✨",
