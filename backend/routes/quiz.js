@@ -11,10 +11,10 @@ async function generateQuizFromText(topic, numQuestions = 3) {
     throw new Error("MISTRAL_API_KEY is not set in environment");
   }
 
-  const prompt = `Tu es une IA qui crée des quiz pédagogiques pour des collégien·nes/lycéen·nes.
-Sujet de travail de l'élève : "${topic}".
+  const prompt = `Tu es une IA qui crée des quiz pédagogiques pour des élèves.
+Le niveau (primaire, collège, lycée, université) et le sujet sont décrits dans ce texte : "${topic}".
 
-Génère ${numQuestions} questions à choix multiples pour vérifier qu'il ou elle a bien compris. Utilise un ton bienveillant, simple et clair.
+Génère ${numQuestions} questions à choix multiples pour vérifier que l'élève a bien compris. Utilise un ton bienveillant, simple et clair.
 
 Répond UNIQUEMENT avec du JSON valide, sans explication autour, avec ce format exact :
 {

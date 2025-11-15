@@ -8,6 +8,16 @@ interface Question {
   correct: number;
 }
 
+interface WolframExplanation {
+  title: string;
+  plaintext: string;
+}
+
+interface WolframHistoryEntry {
+  question: string;
+  explanations: WolframExplanation[];
+}
+
 const QuizPage: React.FC = () => {
   const [topic, setTopic] = useState('');
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -17,6 +27,10 @@ const QuizPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [wolframHistory, setWolframHistory] = useState<WolframHistoryEntry[]>([]);
+  const [wolframLoading, setWolframLoading] = useState(false);
+  const [wolframError, setWolframError] = useState<string | null>(null);
+
   const { updateXP } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,12 +38,14 @@ const QuizPage: React.FC = () => {
   // Check for themed quiz data in location state
   useEffect(() => {
     if (location.state?.themedQuiz) {
-      const { themeData, questions: themedQuestions } = location.state;
+      const { themeData, questions: themedQuestions } = location.state as any;
       setTopic(`${themeData.theme} - ${themeData.subTheme} (${themeData.title})`);
       setQuestions(themedQuestions);
       setStarted(true);
       setScore(0);
       setCurrentQuestion(0);
+      setWolframHistory([]);
+      setWolframError(null);
     }
   }, [location.state]);
 
@@ -39,6 +55,8 @@ const QuizPage: React.FC = () => {
 
     setIsLoading(true);
     setError(null);
+    setWolframHistory([]);
+    setWolframError(null);
 
     try {
       const res = await fetch('http://localhost:4000/api/quiz/from-text', {
@@ -70,6 +88,49 @@ const QuizPage: React.FC = () => {
       setError(e.message || 'Impossible de générer le quiz, réessaie plus tard.');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleWolframExplain = async () => {
+    if (!questions.length) return;
+
+    const current = questions[currentQuestion];
+    const input = current.question;
+
+    setWolframLoading(true);
+    setWolframError(null);
+
+    try {
+      const res = await fetch('http://localhost:4000/api/wolfram/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Erreur lors de l'appel à Wolfram");
+      }
+
+      const data = await res.json();
+      const explanations: WolframExplanation[] = data.explanations || [];
+
+      setWolframHistory((prev) => [
+        {
+          question: current.question,
+          explanations,
+        },
+        ...prev,
+      ]);
+    } catch (e: any) {
+      console.error('[QuizPage] Wolfram explanation error', e);
+      setWolframError(
+        e.message || "Impossible de récupérer l'explication Wolfram."
+      );
+    } finally {
+      setWolframLoading(false);
     }
   };
 
@@ -186,7 +247,59 @@ const QuizPage: React.FC = () => {
               </button>
             ))}
           </div>
+
+          <div style={{ marginTop: '1.5rem' }}>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={handleWolframExplain}
+              disabled={wolframLoading}
+            >
+              {wolframLoading
+                ? 'Consultation Wolfram...'
+                : 'Voir l’explication par Wolfram'}
+            </button>
+            {wolframError && (
+              <p
+                className="helper-text"
+                style={{ color: '#fb7185', marginTop: '0.5rem' }}
+              >
+                {wolframError}
+              </p>
+            )}
+          </div>
         </section>
+
+        {wolframHistory.length > 0 && (
+          <section className="card" style={{ marginTop: '1.5rem' }}>
+            <div className="card-header">
+              <h2 className="card-title">Historique des explications Wolfram</h2>
+              <p className="card-subtitle">
+                Résultats et explications renvoyés par Wolfram Alpha pour tes questions.
+              </p>
+            </div>
+            <div className="wolfram-history">
+              {wolframHistory.map((entry, idx) => (
+                <div
+                  key={idx}
+                  className="wolfram-entry"
+                  style={{ marginBottom: '1rem' }}
+                >
+                  <p className="wolfram-question">
+                    <strong>Question :</strong> {entry.question}
+                  </p>
+                  <ul className="wolfram-explanations">
+                    {entry.explanations.map((exp, i) => (
+                      <li key={i}>
+                        <strong>{exp.title} :</strong> {exp.plaintext}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );
