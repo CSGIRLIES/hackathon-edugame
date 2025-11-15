@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useUser } from '../contexts/UserContext.tsx';
 import { supabase } from '../utils/supabaseClient.ts';
 import { createProfile } from '../utils/profileService.ts';
 
 const OnboardingPage: React.FC = () => {
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [animalType, setAnimalType] = useState('');
   const [animalColor, setAnimalColor] = useState('');
@@ -14,32 +16,31 @@ const OnboardingPage: React.FC = () => {
   const { setUser } = useUser();
 
   const animalOptions = [
-    { id: 'cat', label: 'Chaton ailé', hint: 'Curieux, joueur, créatif' },
-    { id: 'dragon', label: 'Mini-dragon', hint: 'Brave, puissant, passionné' },
-    { id: 'otter', label: 'Loutre érudite', hint: 'Calme, concentrée, studieuse' },
-    { id: 'penguin', label: 'Pingouin cosmique', hint: 'Fun, chill, régulier' },
+    { id: 'cat', label: t('onboarding.animalCat'), hint: t('onboarding.animalCatHint') },
+    { id: 'dragon', label: t('onboarding.animalDragon'), hint: t('onboarding.animalDragonHint') },
+    { id: 'otter', label: t('onboarding.animalOtter'), hint: t('onboarding.animalOtterHint') },
+    { id: 'penguin', label: t('onboarding.animalPenguin'), hint: t('onboarding.animalPenguinHint') },
   ];
 
   const colorOptions = [
-    { id: '#38bdf8', label: 'Bleu galaxie' },
-    { id: '#a855ff', label: 'Violet magique' },
-    { id: '#f97316', label: 'Orange énergie' },
-    { id: '#22c55e', label: 'Vert focus' },
+    { id: '#38bdf8', label: t('onboarding.colorBlue') },
+    { id: '#a855ff', label: t('onboarding.colorPurple') },
+    { id: '#f97316', label: t('onboarding.colorOrange') },
+    { id: '#22c55e', label: t('onboarding.colorGreen') },
   ];
 
   const handleNext = async () => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      // Get the current authenticated user from Supabase
       if (!supabase) {
-        alert('Supabase not configured. Profile cannot be saved.');
+        alert(t('onboarding.noSupabase'));
         return;
       }
 
       const { data: { user: authUser } } = await supabase.auth.getUser();
       if (!authUser) {
-        alert('No authenticated user found. Please log in again.');
+        alert(t('onboarding.noUser'));
         navigate('/');
         return;
       }
@@ -54,7 +55,6 @@ const OnboardingPage: React.FC = () => {
         level: 'baby' as const,
       };
 
-      // Save profile to Supabase
       const success = await createProfile({
         user_id: authUser.id,
         name: userName,
@@ -66,7 +66,7 @@ const OnboardingPage: React.FC = () => {
       });
 
       if (!success) {
-        alert('Failed to save profile. Please try again.');
+        alert(t('onboarding.profileSaveFailed'));
         return;
       }
 
@@ -85,41 +85,41 @@ const OnboardingPage: React.FC = () => {
     (step === 2 && !!animalColor) ||
     (step === 3 && !!animalName.trim());
 
-  const stepTitle = [
-    'D’abord, on fait connaissance',
-    'Choisis ton compagnon magique',
-    'Choisis sa couleur d’aura',
-    'Donne-lui un nom',
-  ][step];
+  const stepTitles = [
+    t('onboarding.step1Title'),
+    t('onboarding.step2Title'),
+    t('onboarding.step3Title'),
+    t('onboarding.step4Title'),
+  ];
 
-  const stepSubtitle = [
-    'Comment veux-tu que ton compagnon t’appelle ?',
-    'Lequel te ressemble le plus pour apprendre ?',
-    'Quelle couleur te motive le plus pour travailler ?',
-    'Un nom cute, drôle ou badass, à toi de choisir ✨',
-  ][step];
+  const stepSubtitles = [
+    t('onboarding.step1Subtitle'),
+    t('onboarding.step2Subtitle'),
+    t('onboarding.step3Subtitle'),
+    t('onboarding.step4Subtitle'),
+  ];
 
   return (
     <div className="page">
       <header className="page-header">
-        <h1 className="page-title">Crée ton duo légendaire ✨</h1>
+        <h1 className="page-title">{t('onboarding.title')}</h1>
         <p className="page-subtitle">
-          En quelques étapes, tu adoptes un bébé animal magique qui va réviser, jouer et progresser avec toi.
+          {t('onboarding.subtitle')}
         </p>
       </header>
 
       <main>
         <section className="card onboarding-card">
           <div className="card-header">
-            <h2 className="card-title">{stepTitle}</h2>
-            <p className="card-subtitle">{stepSubtitle}</p>
+            <h2 className="card-title">{stepTitles[step]}</h2>
+            <p className="card-subtitle">{stepSubtitles[step]}</p>
           </div>
 
           {step === 0 && (
             <>
               <div className="input-group">
                 <label className="input-label" htmlFor="name">
-                  Ton prénom ou pseudo
+                  {t('onboarding.nameLabel')}
                 </label>
                 <input
                   id="name"
@@ -127,11 +127,11 @@ const OnboardingPage: React.FC = () => {
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Ex : Lina, ZoéCode, AstroGirl..."
+                  placeholder={t('onboarding.namePlaceholder')}
                   required
                 />
                 <p className="helper-text">
-                  C'est comme ça que ton compagnon t'appellera.
+                  {t('onboarding.nameHint')}
                 </p>
               </div>
             </>
@@ -155,7 +155,7 @@ const OnboardingPage: React.FC = () => {
                 ))}
               </div>
               <p className="helper-text" style={{ marginTop: '0.75rem' }}>
-                Tu pourras toujours en adopter d'autres plus tard dans la version complète.
+                {t('onboarding.adoptHint')}
               </p>
             </>
           )}
@@ -198,7 +198,7 @@ const OnboardingPage: React.FC = () => {
             <>
               <div className="input-group">
                 <label className="input-label" htmlFor="animalName">
-                  Nom de ton compagnon
+                  {t('onboarding.animalNameLabel')}
                 </label>
                 <input
                   id="animalName"
@@ -206,7 +206,7 @@ const OnboardingPage: React.FC = () => {
                   type="text"
                   value={animalName}
                   onChange={(e) => setAnimalName(e.target.value)}
-                  placeholder="Ex : Nova, Pixel, Draco, Mimi..."
+                  placeholder={t('onboarding.animalNamePlaceholder')}
                   required
                 />
               </div>
@@ -216,7 +216,7 @@ const OnboardingPage: React.FC = () => {
           <div className="btn-row" style={{ marginTop: '1.5rem' }}>
             {step > 0 && (
               <button type="button" className="btn btn-secondary" onClick={handleBack}>
-                Retour
+                {t('onboarding.back')}
               </button>
             )}
             <button
@@ -225,7 +225,7 @@ const OnboardingPage: React.FC = () => {
               onClick={handleNext}
               disabled={!canContinue}
             >
-              {step === 3 ? 'Terminer et rencontrer mon compagnon' : 'Continuer'}
+              {step === 3 ? t('onboarding.finish') : t('onboarding.continue')}
             </button>
           </div>
         </section>

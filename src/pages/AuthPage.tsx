@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useUser } from '../contexts/UserContext.tsx';
 import { supabase } from '../utils/supabaseClient.ts';
 import { fetchProfile } from '../utils/profileService.ts';
 
 const AuthPage: React.FC = () => {
+  const { t } = useTranslation();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +21,7 @@ const AuthPage: React.FC = () => {
     setError(null);
 
     if (!supabase) {
-      setError("L'authentification n'est pas configurée (Supabase manquant).");
+      setError(t('auth.authError'));
       return;
     }
 
@@ -33,7 +35,7 @@ const AuthPage: React.FC = () => {
         });
 
         if (signInError || !data.session || !data.user) {
-          throw new Error(signInError?.message || 'Connexion impossible.');
+          throw new Error(signInError?.message || t('errors.unauthorized'));
         }
 
         // Fetch the user's companion profile from Supabase
@@ -64,7 +66,7 @@ const AuthPage: React.FC = () => {
         });
 
         if (signUpError || !data.user) {
-          throw new Error(signUpError?.message || "Inscription impossible.");
+          throw new Error(signUpError?.message || t('errors.generic'));
         }
 
         // After sign up, we send the user to onboarding to configure their companion.
@@ -72,7 +74,7 @@ const AuthPage: React.FC = () => {
       }
     } catch (err: any) {
       console.error('[AuthPage] Auth error', err);
-      setError(err.message || 'Une erreur est survenue.');
+      setError(err.message || t('auth.errorOccurred'));
     } finally {
       setIsSubmitting(false);
     }
@@ -81,27 +83,25 @@ const AuthPage: React.FC = () => {
   return (
     <div className="page">
       <header className="page-header">
-        <h1 className="page-title">CSGIRLIES ✨</h1>
+        <h1 className="page-title">{t('app.title')} ✨</h1>
         <p className="page-subtitle">
-          Adopte un compagnon magique qui apprend avec toi, te motive et te félicite.
+          {t('app.subtitle')}
         </p>
       </header>
 
       <main>
         <section className="card auth-card">
           <div className="card-header">
-            <h2 className="card-title">{isLogin ? 'Connexion' : 'Créer un compte'}</h2>
+            <h2 className="card-title">{isLogin ? t('auth.loginTitle') : t('auth.signupTitle')}</h2>
             <p className="card-subtitle">
-              {isLogin
-                ? 'Retrouve ton compagnon et continue ta progression.'
-                : 'En quelques secondes, adopte ton bébé animal magique.'}
+              {isLogin ? t('auth.loginSubtitle') : t('auth.signupSubtitle')}
             </p>
           </div>
 
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label className="input-label" htmlFor="email">
-                Email
+                {t('auth.email')}
               </label>
               <input
                 id="email"
@@ -116,7 +116,7 @@ const AuthPage: React.FC = () => {
 
             <div className="input-group">
               <label className="input-label" htmlFor="password">
-                Mot de passe
+                {t('auth.password')}
               </label>
               <input
                 id="password"
@@ -127,7 +127,7 @@ const AuthPage: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <p className="helper-text">Pas besoin d'un mot de passe parfait, c'est un prototype 💜</p>
+              <p className="helper-text">{t('auth.passwordHint')}</p>
             </div>
 
             {error && (
@@ -140,18 +140,18 @@ const AuthPage: React.FC = () => {
               <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                 {isSubmitting
                   ? isLogin
-                    ? 'Connexion...'
-                    : 'Création...'
+                    ? t('auth.loggingIn')
+                    : t('auth.signingUp')
                   : isLogin
-                  ? 'Se connecter'
-                  : "Rejoindre l'aventure"}
+                  ? t('auth.signInButton')
+                  : t('auth.signUpButton')}
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => setIsLogin(!isLogin)}
               >
-                {isLogin ? "Nouvelle ici ? Crée ton compte" : 'Déjà un compagnon ? Connexion'}
+                {isLogin ? t('auth.switchToSignup') : t('auth.switchToLogin')}
               </button>
             </div>
           </form>
