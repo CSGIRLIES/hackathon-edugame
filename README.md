@@ -193,6 +193,13 @@ REACT_APP_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY_HERE
    - Save changes.
    - Now users can sign up and log in immediately without email verification (perfect for demos!).
 
+4. **Create the database table for companion profiles**:
+   - In your Supabase dashboard → **SQL Editor**.
+   - Open the file `supabase_schema.sql` from the project root.
+   - Copy and paste the entire SQL script into the SQL Editor.
+   - Click **Run** to create the `companion_profiles` table with all necessary policies and triggers.
+   - This table stores: user name, companion type/name/color, XP, level, and timestamps.
+
 > Tip: Never commit `.env` files. They're already in `.gitignore`.
 
 
@@ -318,11 +325,15 @@ This will compile the React app and open it on `http://localhost:3000`.
 ---
 ## 8. Notes & Next Steps
 
-### Current limitations
+### Current state
 
-- Authentication uses **Supabase** (real accounts, but companion profile/XP not yet persisted to database).
+- Authentication uses **Supabase** (real user accounts with email/password).
+- **Companion profiles are persisted** to Supabase database:
+  - Name, animal type, animal name, color, XP, and level are saved.
+  - XP updates automatically sync to the database in real-time.
+  - Profiles persist across sessions – log out and back in to keep your progress!
 - Document upload and study plan generation are wired to the UI but require uploaded material to work.
-- XP and companion state are stored in memory on the frontend (not persisted across refreshes).
+- AI quiz generation works with any topic (powered by Mistral).
 
 ### Future extensions
 
