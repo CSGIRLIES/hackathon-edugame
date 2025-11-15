@@ -27,6 +27,7 @@ interface UserContextType {
   user: User | null;
   setUser: (user: User | null) => void;
   updateXP: (xp: number) => void;
+  subtractXP: (xp: number) => Promise<boolean>;
   startLearningSession: (topic: string, duration: number) => void;
 }
 
@@ -54,16 +55,43 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       } else {
         newLevel = 'adult';
       }
-      
+
       const updatedUser = { ...user, xp: newXP, level: newLevel };
       setUser(updatedUser);
-      
+
       // Persist XP and level to Supabase
       await updateProfile(user.id, {
         xp: newXP,
         level: newLevel,
       });
     }
+  };
+
+  const subtractXP = async (xp: number): Promise<boolean> => {
+    if (!user || user.xp < xp) {
+      return false;
+    }
+
+    const newXP = user.xp - xp;
+    let newLevel: 'baby' | 'adolescent' | 'adult';
+    if (newXP < 20) {
+      newLevel = 'baby';
+    } else if (newXP < 60) {
+      newLevel = 'adolescent';
+    } else {
+      newLevel = 'adult';
+    }
+
+    const updatedUser = { ...user, xp: newXP, level: newLevel };
+    setUser(updatedUser);
+
+    // Persist XP and level to Supabase
+    await updateProfile(user.id, {
+      xp: newXP,
+      level: newLevel,
+    });
+
+    return true;
   };
 
   const startLearningSession = (topic: string, duration: number) => {
@@ -76,7 +104,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, updateXP, startLearningSession }}>
+    <UserContext.Provider value={{ user, setUser, updateXP, subtractXP, startLearningSession }}>
       {children}
     </UserContext.Provider>
   );
