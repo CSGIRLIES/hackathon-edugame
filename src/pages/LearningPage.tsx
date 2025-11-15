@@ -411,14 +411,23 @@ const LearningPage: React.FC = () => {
 
       <Modal
         isOpen={showCompletionModal}
-        onClose={() => setShowCompletionModal(false)}
+        onClose={() => {
+          setShowCompletionModal(false);
+          setIsWorking(false);
+          setCheckedTasks([false, false, false]);
+        }}
         title="🎉 Bravo !"
         message={`Tu as terminé une session de 25 minutes ! ${sessionXP} XP gagnés pour ${user.animalName}. C'est l'heure de tester tes connaissances !`}
         icon="🎉"
         buttonText="Commencer le quiz"
         buttonAction={() => {
           setShowCompletionModal(false);
-          navigate('/quiz', { state: { topic } });
+          setIsWorking(false);
+          setCheckedTasks([false, false, false]);
+          // Small delay to ensure modal closes before navigation
+          setTimeout(() => {
+            navigate('/quiz', { state: { topic } });
+          }, 100);
         }}
       />
     </div>
