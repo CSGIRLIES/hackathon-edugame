@@ -39,7 +39,8 @@ const THEME_OPTIONS = [
 ];
 
 const WolframCompanionPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'ar';
   const [theme, setTheme] = useState<string>('Core Language & Structure');
   const [task, setTask] = useState<string>('');
   const [details, setDetails] = useState<string>('');
@@ -165,6 +166,8 @@ const WolframCompanionPage: React.FC = () => {
               value={task}
               onChange={(e) => setTask(e.target.value)}
               placeholder={t('wolfram.taskPlaceholder')}
+              dir={isRTL ? 'rtl' : 'ltr'}
+              style={{ textAlign: isRTL ? 'right' : 'left' }}
             />
           </div>
 
@@ -178,6 +181,8 @@ const WolframCompanionPage: React.FC = () => {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               placeholder={t('wolfram.detailsPlaceholder')}
+              dir={isRTL ? 'rtl' : 'ltr'}
+              style={{ textAlign: isRTL ? 'right' : 'left' }}
             />
           </div>
 
@@ -191,6 +196,8 @@ const WolframCompanionPage: React.FC = () => {
               value={wolframInput}
               onChange={(e) => setWolframInput(e.target.value)}
               placeholder={t('wolfram.inputPlaceholder')}
+              dir="ltr"
+              style={{ textAlign: 'left' }}
             />
             <p className="helper-text">
               {t('wolfram.inputHelper')}
