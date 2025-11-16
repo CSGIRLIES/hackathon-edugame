@@ -8,7 +8,6 @@ import Modal from '../components/Modal.tsx';
 const LearningPage: React.FC = () => {
   const { t } = useTranslation();
   const [topic, setTopic] = useState('');
-  const [usePomodoro, setUsePomodoro] = useState(true);
   const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isWorking, setIsWorking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -176,18 +175,7 @@ const LearningPage: React.FC = () => {
                 />
               </div>
 
-              <div className="input-group">
-                <label className="input-label">{t('learning.modeLabel')}</label>
-                <label className="helper-text">
-                  <input
-                    type="checkbox"
-                    checked={usePomodoro}
-                    onChange={() => setUsePomodoro(!usePomodoro)}
-                    style={{ marginRight: 8 }}
-                  />
-                  {t('learning.pomodoroMode')}
-                </label>
-              </div>
+
 
               <div className="btn-row" style={{ marginTop: '1.25rem' }}>
                 <button
