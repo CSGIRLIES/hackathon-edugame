@@ -1,13 +1,18 @@
 :root {
   --bg-gradient: radial-gradient(circle at top, #4c1d95 0%, #2e1065 40%, #020617 100%);
-  --card-bg: rgba(10, 12, 32, 0.94);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --input-bg: #f8f9fa;
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: rgba(0, 0, 0, 0.2);
+  --modal-bg: #ffffff;
+  --modal-border: rgba(0, 0, 0, 0.15);
   --accent-pink: #ff6ad5;
   --accent-purple: #a855ff;
   --accent-blue: #38bdf8;
   --accent-yellow: #facc15;
-  --text-main: #f9fafb;
-  --text-muted: #9ca3af;
+  --text-main: #000000;
+  --text-muted: #666666;
   --danger: #fb7185;
 }
 
@@ -23,7 +28,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--bg-gradient);
+  background: var(--lp-color-background);
   color: var(--text-main);
 }
 
@@ -154,13 +159,13 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--btn-secondary-bg);
   color: var(--text-main);
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  border: 1px solid var(--btn-secondary-border);
 }
 
 .btn-secondary:hover {
-  background: rgba(15, 23, 42, 0.98);
+  background: #e9ecef;
   transform: translateY(-1px);
 }
 
@@ -171,7 +176,7 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--btn-secondary-bg);
   border-color: var(--accent-blue);
   transform: translateY(-1px);
 }
@@ -205,8 +210,8 @@ body {
   width: 100%;
   padding: 0.75rem 0.9rem;
   border-radius: 0.8rem;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--input-bg);
   color: var(--text-main);
   font-size: 0.9rem;
 }
@@ -262,8 +267,9 @@ body {
   gap: 0.35rem;
   border-radius: 999px;
   padding: 0.2rem 0.75rem;
-  background: rgba(56, 189, 248, 0.12);
-  color: #e0f2fe;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
   font-size: 0.8rem;
 }
 
@@ -273,8 +279,9 @@ body {
   gap: 0.4rem;
   border-radius: 999px;
   padding: 0.2rem 0.75rem;
-  background: rgba(244, 114, 182, 0.14);
-  color: #f9a8d4;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
   font-size: 0.8rem;
 }
 
@@ -461,13 +468,13 @@ body {
   left: 100%;
   margin-left: 0.75rem;
   max-width: 220px;
-  background: rgba(15, 23, 42, 0.96);
+  background: var(--card-bg);
   color: var(--text-main);
   border-radius: 1rem;
   padding: 0.6rem 0.8rem;
   font-size: 0.8rem;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .animal-message::before {
@@ -541,8 +548,8 @@ body {
 .quiz-option-btn {
   width: 100%;
   justify-content: flex-start;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: var(--card-bg);
+  border: 1px solid var(--btn-secondary-border);
   color: var(--text-main);
 }
 
@@ -562,7 +569,7 @@ body {
 .theme-tab {
   padding: 0.75rem 1.5rem;
   border: 2px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--card-bg);
   border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
@@ -590,7 +597,7 @@ body {
   border: 2px solid rgba(148, 163, 184, 0.4);
   border-radius: 0.75rem;
   padding: 1.5rem;
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--card-bg);
   transition: all 0.2s;
 }
 
@@ -619,21 +626,25 @@ body {
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
+  border: 1px solid var(--card-border);
 }
 
 .difficulty-beginner {
-  background: rgba(34, 197, 94, 0.2);
-  color: #bbf7d0;
+  background: var(--card-bg);
+  color: #22c55e;
+  border-color: #22c55e;
 }
 
 .difficulty-intermediate {
-  background: rgba(245, 158, 11, 0.2);
-  color: #fed7aa;
+  background: var(--card-bg);
+  color: #f59e0b;
+  border-color: #f59e0b;
 }
 
 .difficulty-advanced {
-  background: rgba(239, 68, 68, 0.2);
-  color: #fca5a5;
+  background: var(--card-bg);
+  color: #ef4444;
+  border-color: #ef4444;
 }
 
 .quiz-card-subtitle {
@@ -842,8 +853,8 @@ code {
   width: 100%;
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
   color: var(--text-main);
   font-size: 0.85rem;
   cursor: pointer;
@@ -853,7 +864,7 @@ code {
 
 .language-select:hover {
   border-color: var(--accent-blue);
-  background: rgba(15, 23, 42, 0.98);
+  background: #e9ecef;
 }
 
 .language-select:focus {
@@ -892,7 +903,7 @@ code {
   height: 48px;
   border-radius: 50%;
   border: 2px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.95);
+  background: var(--card-bg);
   color: var(--text-main);
   font-size: 1.5rem;
   cursor: pointer;
@@ -906,7 +917,7 @@ code {
 
 .user-avatar-btn:hover {
   border-color: var(--accent-blue);
-  background: rgba(15, 23, 42, 0.98);
+  background: #e9ecef;
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
 }
@@ -923,8 +934,8 @@ code {
   left: 50%;
   transform: translateX(-50%);
   min-width: 200px;
-  background: rgba(15, 23, 42, 0.98);
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.9);
@@ -943,9 +954,9 @@ code {
   transform: translateX(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: rgba(15, 23, 42, 0.98);
-  border-left: 1px solid rgba(148, 163, 184, 0.4);
-  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  background: var(--card-bg);
+  border-left: 1px solid var(--card-border);
+  border-top: 1px solid var(--card-border);
 }
 
 .user-dropdown-name {
@@ -994,7 +1005,7 @@ code {
 }
 
 /* ======================================= */
-/* 🌈 CSGIRLIES LANDING PAGE PASTEL THEME */
+/* 🌈 PAWFRIEND LANDING PAGE PASTEL THEME */
 /* ======================================= */
 
 :root {
@@ -1002,7 +1013,7 @@ code {
   --lp-color-primary: #A3C9F3; /* Bleu ciel doux */
   --lp-color-secondary: #FFD54F; /* Jaune doré (XP/Énergie) */
   --lp-color-accent: #81C784; /* Vert menthe (Succès/Action) */
-  --lp-color-background: #FBFDFF; /* Fond général très clair */
+  --lp-color-background: #FFECA1; /* Fond jour crémeux */
   --lp-color-text: #333333; /* Texte principal sombre */
   --lp-color-text-muted: #B0B0B0; /* Texte de substitution */
 
@@ -1013,18 +1024,25 @@ code {
 
 /* Variante sombre si le body reçoit la classe .dark-mode */
 body.dark-mode {
+  --card-bg: #E2EAF4;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --input-bg: #f0f2f5;
+  --btn-secondary-bg: #E2EAF4;
+  --btn-secondary-border: rgba(0, 0, 0, 0.2);
+  --modal-bg: #E2EAF4;
+  --modal-border: rgba(0, 0, 0, 0.15);
+  --text-main: #000000;
+  --text-muted: #666666;
   --lp-color-primary: #1F3F66; /* Bleu foncé pour la clarté */
   --lp-color-secondary: #FFAB40; /* Orange vif pour l'XP */
-  --lp-color-background: #1A1A2E; /* Fond sombre */
-  --lp-color-text: #F0F0F0; /* Texte clair */
-  --lp-card-background: #242940; /* Cartes légèrement plus claires */
-  --lp-shadow-soft: 0 6px 15px rgba(0, 0, 0, 0.4);
+  --lp-color-background: #A29FE8; /* Fond nuit lilas */
+  --lp-color-text: #000000; /* Texte noir */
 }
 
 /* CONTAINER GÉNÉRAL DE LA LANDING */
 .landing-page {
   min-height: 100vh;
-  background-color: var(--lp-color-background);
+  background: var(--lp-color-background);
   color: var(--lp-color-text);
   font-family: 'Poppins', 'Arial', sans-serif;
   display: flex;
@@ -1041,10 +1059,9 @@ body.dark-mode {
 }
 
 .landing-logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--lp-color-primary);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  height: 2.5rem;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
 }
 
 /* MAIN LAYOUT */
@@ -1224,6 +1241,16 @@ body.dark-mode {
 .landing-btn-secondary:hover {
   background-color: var(--lp-color-primary);
   color: #ffffff;
+}
+
+/* LEARNING ANALYTICS NOTEBOOK STYLE */
+.learning-analytics-card {
+  background-color: var(--card-bg) !important;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 100% 28px, 28px 100%;
+  background-position: 0 0, 0 0;
 }
 
 /* RESPONSIVE LANDING */

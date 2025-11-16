@@ -90,25 +90,25 @@ const AuthPage: React.FC = () => {
   return (
     <div className="page">
       <header className="page-header">
-        <h1 className="page-title">{t('app.title')} ✨</h1>
+        <h1 className="page-title">{t('app.title', 'CSGIRLIES')} ✨</h1>
         <p className="page-subtitle">
-          {t('app.subtitle')}
+          {t('app.subtitle', 'Adopt your virtual study companion!')}
         </p>
       </header>
 
       <main>
         <section className="card auth-card">
           <div className="card-header">
-            <h2 className="card-title">{isLogin ? t('auth.loginTitle') : t('auth.signupTitle')}</h2>
+            <h2 className="card-title">{isLogin ? t('auth.loginTitle', 'Login') : t('auth.signupTitle', 'Sign Up')}</h2>
             <p className="card-subtitle">
-              {isLogin ? t('auth.loginSubtitle') : t('auth.signupSubtitle')}
+              {isLogin ? t('auth.loginSubtitle', 'Welcome back!') : t('auth.signupSubtitle', 'Create your account and get started')}
             </p>
           </div>
 
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label className="input-label" htmlFor="email">
-                {t('auth.email')}
+                {t('auth.email', 'Email')}
               </label>
               <input
                 id="email"
@@ -123,7 +123,7 @@ const AuthPage: React.FC = () => {
 
             <div className="input-group">
               <label className="input-label" htmlFor="password">
-                {t('auth.password')}
+                {t('auth.password', 'Password')}
               </label>
               <input
                 id="password"
@@ -134,7 +134,7 @@ const AuthPage: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <p className="helper-text">{t('auth.passwordHint')}</p>
+              <p className="helper-text">{t('auth.passwordHint', 'Must be at least 6 characters')}</p>
             </div>
 
             {error && (
@@ -147,18 +147,18 @@ const AuthPage: React.FC = () => {
               <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                 {isSubmitting
                   ? isLogin
-                    ? t('auth.loggingIn')
-                    : t('auth.signingUp')
+                    ? t('auth.loggingIn', 'Logging in...')
+                    : t('auth.signingUp', 'Signing up...')
                   : isLogin
-                  ? t('auth.signInButton')
-                  : t('auth.signUpButton')}
+                  ? t('auth.signInButton', 'Sign In')
+                  : t('auth.signUpButton', 'Sign Up')}
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => setIsLogin(!isLogin)}
               >
-                {isLogin ? t('auth.switchToSignup') : t('auth.switchToLogin')}
+                {isLogin ? t('auth.switchToSignup', 'Need an account? Sign up') : t('auth.switchToLogin', 'Already have an account? Sign in')}
               </button>
             </div>
           </form>

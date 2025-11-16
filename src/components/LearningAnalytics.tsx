@@ -89,9 +89,9 @@ const LearningAnalytics: React.FC<LearningAnalyticsProps> = ({ style }) => {
   if (loading) {
     return (
       <div style={{
-        background: 'rgba(15, 23, 42, 0.94)',
+        background: 'var(--card-bg)',
         borderRadius: '1.25rem',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        border: '1px solid var(--card-border)',
         padding: '1.75rem',
         display: 'flex',
         alignItems: 'center',
@@ -131,11 +131,12 @@ const LearningAnalytics: React.FC<LearningAnalyticsProps> = ({ style }) => {
   };
 
   return (
-    <div style={{
-      background: 'rgba(15, 23, 42, 0.94)',
+    <div className="learning-analytics-card" style={{
+      background: 'var(--card-bg)',
       borderRadius: '1.25rem',
-      border: '1px solid rgba(255, 255, 255, 0.08)',
+      border: '1px solid var(--card-border)',
       padding: '1.75rem',
+      position: 'relative',
       ...style
     }}>
       <div style={{
