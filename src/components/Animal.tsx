@@ -354,11 +354,13 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
             transform: facing === 'left' ? 'scaleX(-1)' : 'scaleX(1)',
           }}
         />
-        <div className="animal-message">
-          <div className="animal-message-text">
-            <div>{currentMessage}</div>
+        {isVisible && (
+          <div className="animal-message">
+            <div className="animal-message-text">
+              <div>{currentMessage}</div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
