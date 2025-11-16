@@ -1,137 +1,176 @@
-# CSGIRLIES – Magical Study Companion 🪄 🌍
+# PawFriend : Your Magical Study Companion 🐾 🌍
 
-CSGIRLIES is a **multi-language gamified learning app** where you adopt a **magical baby animal** (winged kitten, mini-dragon, scholarly otter, cosmic penguin...) that grows and learns with you.
+**By PawTeam**
+
+PawFriend is a **multi-language gamified learning app** where you adopt a **magical companion animal** (fox, puppy) that grows and learns with you.
 
 🎯 **Available in 5 languages**: English 🇬🇧, French 🇫🇷, Spanish 🇪🇸, German 🇩🇪, Arabic 🇸🇦 (with RTL support)
 
-When you study, focus, and answer quizzes correctly, your companion gains XP, levels up (bébé → adolescent → adulte), and sends you encouraging messages – “Talking Tom”-style but for learning.
+When you study, focus, and answer quizzes correctly, your companion gains XP, levels up (baby → adolescent → adult), and sends you encouraging messages. The goal is to be consistent xith your learning so your companion can stay nourished and hydrated. 
 
 ---
-## 1. Features
+
+## ✨ Features
 
 ### 🌍 Multi-Language Support
-- **5 languages supported**: English 🇬🇧, French 🇫🇷, Spanish 🇪🇸, German 🇩🇪, Arabic 🇸🇦
+- **5 languages**: English 🇬🇧, French 🇫🇷, Spanish 🇪🇸, German 🇩🇪, Arabic 🇸🇦
 - **Language selector**: Top-right dropdown with flag icons
 - **RTL support**: Arabic automatically switches to right-to-left layout
 - **Real-time switching**: Instant language changes across entire app
 - **Persistent choice**: Language selection saved in localStorage
+- **Complete translation**: Every button, message, and feature translated
+- **Context-aware content**: Animal messages adapt to selected language
 
-### 🔥 **NEW: Visual Streaks System**
-- **Fire-based motivation**: 🔥 Single flame (1-2 days), 🔥🔥 Double flames (3-6 days), 🔥🔥🔥🔥 Epic multi-flames
-- **Personal records**: 🏆 Trophy for beating your max streak
-- **Encouragement messages**: Dynamic based on streak length ("You're on fire!", "Legendary!")
-- **Dashboard integration**: Prominent 2x2 grid with companion, sessions, and streaks
+### 🎓 Smart Study Sessions
+- **Pomodoro Technique**: 25-minute focus sessions + 5-minute breaks
+- **AI-Powered Study Plans**: Upload documents (PDF/DOCX) and get personalized study schedules according to the uploaded material
+- **Cycle-by-Cycle Execution**: Automated progression through multiple Pomodoro cycles
+- **Detailed Guidance**: Each cycle includes:
+  - Focus task description
+  - Specific objectives
+  - Key points to remember
+  - Progress tracking with checkboxes
+- **Break Management**: Automatic transitions between focus and rest periods
+- **XP Rewards**: +25 XP per completed 25-minute session
 
-### 👨‍👩‍👧‍👦 **NEW: Parent Controls & Tracking**
-- **Parent email storage**: Link accounts for oversight
-- **Study goals**: Set daily study time objectives
-- **Total study time**: Cumulative session tracking
-- **Ready for parental dashboards**: Foundation for monitoring child progress
+### 🧠 AI-Powered Quizzes
+- **Topic-Based Generation**: AI creates quizzes on any subject using Mistral AI
+- **Multiple Choice**: 3 questions per quiz, 4 options each
+- **Instant Feedback**: See if answers are correct immediately
+- **XP Rewards**: +20 XP per correct answer (60 XP max per quiz)
 
-### 👥 Social Features Foundation
-- **XP leaderboards**: Comparative study achievements
-- **Streak competitions**: Social streak visibility
-- **Friend connections**: Ready for friend visiting features
-- **"Top Scholars"** soft leaderboards by study consistency
+⚠️ **Important Note: AI Content Limitations**
+AI-generated quiz content may have inaccuracies or errors. The open-source model (Mistral AI) can sometimes:
+- Provide false answers or incorrect information
+- Omit correct answer options from the choices
+- Incorrectly evaluate answers as right or wrong
+- Generate misleading or inaccurate explanations
+Users should always verify important information and use quizzes as practice tools rather than definitive assessments.
+- **Wolfram Integration**: Get detailed mathematical explanations for quiz questions
+- **Themed Quizzes**: Pre-made quiz themes across subjects:
+  - Mathematics (Algebra, Geometry, Calculus)
+  - Sciences (Biology, Chemistry, Physics)
+  - History (Ancient civilizations, Medieval period, Modern era)
+  - Geography (Maps, Capitals, Demographics)
+  - Languages (Vocabulary, Grammar, Conjugation)
+  - Computer Science (Wolfram Language tutorials)
 
-### Core user journey
+### 🐾 Companion System
+- **Choose Your Companion**: Fox or puppy, each with unique personality
+- **Customizable Appearance**: 4 aura colors (Galaxy Blue, Magic Purple, Energy Orange, Focus Green)
+- **Level Progression**:
+  - **Baby** (0-999 XP): Small, learning together
+  - **Adolescent** (1000-1999 XP): Growing stronger
+  - **Adult** (2000+ XP): Fully evolved companion
+- **Context-Aware Messages**: Dynamic messages based on activity:
+  - Dashboard: Motivational messages
+  - Study sessions: Focus encouragement
+  - Breaks: Health reminders (stretch, hydrate)
+  - Quizzes: Calm, supportive messages
+- **Visual Evolution**: Companion orb size and glow intensity increase with level
 
-- **Authentication / Sign-up**
-  - Simple login / sign-up screen.
-  - New users are redirected into an onboarding flow.
+### 💧 Hydration Streaks
+- **Water-Themed Motivation**: 💧 symbols instead of fire (avoiding Snapchat resemblance)
+- **Streak Tracking**: Study daily to keep your companion hydrated
+- **Personal Records**: Track your max streak achievement
+- **Dynamic Messages**:
+  - 1 day: "Your companion is refreshed!"
+  - 3-6 days: "Keep your companion hydrated!"
+  - 7+ days: "Your companion stays hydrated! 💧"
+  - 14+ days: "Epic hydration!"
+  - 30+ days: "Legendary caregiver!"
 
-- **Onboarding**
-  - Step 1: Enter your name or nickname.
-  - Step 2: Choose your animal companion (cat, dragon, otter, penguin – themed labels like *Chaton ailé*, *Mini-dragon*, …).
-  - Step 3: Choose your animal aura color (bleu galaxie, violet magique, orange énergie, vert focus).
-  - Step 4: Name your companion.
+### 📊 Learning Analytics
+- **Study Sessions Counter**: Total Pomodoro cycles completed (🎓)
+- **Average Quiz Score**: Calculated from XP earned (🎯)
+- **Total Study Time**: Minutes spent in focus sessions (⏱️)
+- **Weekly Progress Chart**: Visual bar chart of daily activity
+- **Performance Indicators**:
+  - Excellent (85%+): Green
+  - Good (70-84%): Yellow
+  - Keep Practicing (55-69%): Orange
+  - Needs Improvement (<55%): Red
+- **Personalized Recommendations**: Tips based on your performance
 
-- **Dashboard**
-  - Shows your:
-    - Companion (emoji in a glowing orb) with level: **Bébé / Adolescent / Adulte**.
-    - XP and level pills.
-  - Actions:
-    - **Commencer une session d’apprentissage** (Learning session with optional Pomodoro).
-    - **Faire un quiz rapide** (AI-generated quiz on the topic you choose).
+### 🔐 Authentication & Profiles
+- **Supabase Integration**: Real user accounts with email/password
+- **Instant Signup**: No email verification required for quick demos
+- **Profile Persistence**: All data saved to database:
+  - User name and companion details
+  - XP and level
+  - Streaks (current and max)
+  - Study time and completed cycles
+  - Last study date
+- **Session Management**: Automatic login restoration
 
-- **Learning Session Page**
-  - You describe what you will study (chapter, topic, or pasted course text).
-  - Optional **Pomodoro mode**: 25 min focus → quiz.
-  - Timer + progress bar.
-  - On completion of a 25 min focus, you automatically:
-    - Gain XP (25 XP per completed session).
-    - Are redirected to a quiz to verify your understanding.
+### 🎨 Beautiful UI/UX
+- **Glassmorphic Design**: Modern card-based interface
+- **Dark Theme**: Violet gradient with subtle animations
+- **Animated Companion Orb**: Glowing, pulsing visual feedback
+- **Progress Bars**: Clear visual indicators for timers and XP
+- **Responsive Modals**: Study plan and completion popups
+- **Sound Effects**: Audio feedback for cycle completions
+- **Smooth Transitions**: Polished animations throughout
 
-- **Quiz Page (AI-powered)**
-  - You answer: *“Qu’est-ce que tu veux apprendre aujourd’hui ?”* by writing your topic or copying a part of your course.
-  - The backend calls **Mistral AI** to generate a short multiple-choice quiz in French.
-  - Questions are shown one by one.
-  - Each correct answer gives **+20 XP**.
-  - Final XP is added to your companion and you’re sent back to the dashboard.
+### 📚 Document Processing
+- **File Upload**: Support for PDF, DOCX, and images
+- **AI Ingestion**: Documents automatically chunked and processed
+- **Vector Storage**: Content stored for intelligent retrieval
+- **Study Plan Generation**: AI uses uploaded materials to create customized plans
 
-### Companion & XP system
+### 🍖 Companion Care & Feeding
+- **Food Shop**: Buy food for your companion using earned XP
+- **Animal-Specific Food**: Each companion type has unique foods:
+  - **Puppy**: Croquette (regular) and Muffin (special treat)
+  - **Fox**: Dango (regular) and Bao (special treat)
+- **XP Economy**:
+  - Regular food: Costs 5 XP, gives back 2 XP
+  - Special food: Costs 10 XP, gives back 5 XP (unlocked at adolescent level)
+- **Feeding System**: Interactive feeding with visual bowl states (empty/full)
+- **Level Requirements**: Special treats unlock when companion reaches adolescent level
+- **Reward Mechanism**: Feed your companion to receive bonus XP
 
-- **Companion evolution**
-  - Levels:
-    - **Bébé**: 0–19 XP
-    - **Adolescent**: 20–59 XP
-    - **Adulte**: 60+ XP
-  - Visual changes:
-    - Orb size & glow intensity increase with levels.
-    - Context-aware messages depending on what you’re doing.
-
-- **XP sources**
-  - Learning session: +25 XP per completed Pomodoro.
-  - Quiz: +20 XP per correct answer.
-  - XP directly impacts the level & appearance of your companion.
-
-### Talking companion behavior
-
-The companion sends different messages depending on the context:
-
-- **Dashboard** – motivational, “let’s study today” messages.
-- **Learning session** – focus encouragement (“Chut… mode focus activé”).
-- **Break** – reminders to stretch, hydrate, move.
-- **Quiz** – “don’t panic” encouragement.
-
-Messages rotate automatically every few seconds, so it feels alive and supportive.
-
+### 🎯 Gamification Elements
+- **XP System**: Earn points for every activity
+- **Level Progression**: Visual and functional companion evolution
+- **Achievement Tracking**: Personal records and milestones
+- **Progress Tracking**: Completed cycles, total study time
+- **Motivational Feedback**: Dynamic messages and encouragement
+- **XP Economy**: Spend earned XP on companion food and rewards
 
 ---
-## 2. Tech Stack & Architecture
+
+## 🛠️ Tech Stack
 
 ### Frontend
-
-- **React + TypeScript** (Create React App style setup).
-- **React Router** for navigation between pages.
-- **Internationalization (i18next)** for multi-language support.
-- Global state for user & companion via `UserContext`.
-- Custom CSS theme (dark violet gradient, glassmorphic cards, animated orb).
+- **React + TypeScript**: Modern component-based architecture
+- **React Router**: Client-side navigation
+- **i18next**: Internationalization framework
+- **Context API**: Global state management (UserContext)
+- **Custom CSS**: Themed styling with CSS variables
+- **Supabase Client**: Database and authentication
 
 ### Backend
+- **Node.js + Express**: REST API server
+- **Mistral AI**: Open-source LLM for quizzes and lesson plan generation (`open-mistral-7b`)
+- **Wolfram Alpha API**: Mathematical explanations and themed quiz generations
+- **AI Agents**:
+  - `DocumentIngestionAgent`: PDF/DOCX parsing and chunking
+  - `QuizGenerationAgent`: Intelligent quiz creation
+  - `StudyCoachAgent`: Personalized study plan generation
+- **Vector Storage**: JSON-based document storage for retrieval
 
-- **Node.js + Express** API in `backend/`.
-- **AI integration** via **Mistral** (`open-mistral-7b`) using `MISTRAL_API_KEY`.
-- Ready-made agents (not fully wired to UI yet):
-  - `DocumentIngestionAgent` – parse PDFs/DOCX, chunk + embed them into a vector store.
-  - `QuizGenerationAgent` – generate quizzes from stored chunks.
-  - `StudyCoachAgent` – generate personalized Pomodoro study plans.
-
-### High-level architecture
-
-- **Frontend**: SPA React app served on `http://localhost:3000`.
-- **Backend**: Express server on `http://localhost:4000`.
-- **Quiz flow**:
-  - Frontend → `POST /api/quiz/from-text` (topic & desired number of questions).
-  - Backend calls Mistral → returns structured questions.
-  - Frontend renders quiz, calculates XP, updates UserContext.
-
+### Database
+- **Supabase (PostgreSQL)**: User profiles and progress tracking
+- **Row Level Security**: Data isolation per user
+- **Real-time Sync**: Automatic profile updates
 
 ---
-## 3. Project Structure
+
+## 📁 Project Structure
 
 ```text
-hackathon-edugame-frontend/
+pawfriend/
 ├── backend/
 │   ├── agents/
 │   │   ├── DocumentIngestionAgent.js
@@ -140,344 +179,249 @@ hackathon-edugame-frontend/
 │   ├── data/
 │   │   └── vectorstore.json
 │   ├── routes/
-│   │   ├── quiz.js         # /api/quiz/from-text
-│   │   ├── study.js        # (stub/placeholder for study coach routes)
-│   │   └── upload.js       # (stub/placeholder for ingestion routes)
-│   ├── index.js            # Express server entrypoint
-│   ├── package.json
-│   └── package-lock.json
+│   │   ├── quiz.js         # Quiz generation API
+│   │   ├── study.js        # Study plan generation
+│   │   ├── upload.js       # Document processing
+│   │   └── wolfram.js      # Wolfram Alpha integration
+│   ├── index.js
+│   └── package.json
 ├── public/
+│   ├── completion.mp3      # Cycle completion sound
+│   ├── notification.mp3    # Notification sound
+│   ├── *.png              # Companion sprites
 │   └── index.html
-
- ```text
-hackathon-edugame-frontend/
-├── backend/
-├── public/
 ├── src/
 │   ├── components/
-│   │   ├── Animal.tsx               # Companion animal with dynamic messages
-│   │   ├── LanguageSelector.tsx     # Multi-language dropdown
-│   │   └── StreaksWidget.tsx        # 🔥 Visual streaks with fire emojis
+│   │   ├── Animal.tsx               # Companion with messages
+│   │   ├── LearningAnalytics.tsx    # Stats dashboard
+│   │   ├── LanguageSelector.tsx     # Language switcher
+│   │   ├── Modal.tsx                # Reusable modal
+│   │   ├── SoundConsentBanner.tsx   # Audio permission
+│   │   ├── StreaksWidget.tsx        # Hydration streaks
+│   │   └── UserHeader.tsx           # Top navigation
 │   ├── contexts/
-│   │   └── UserContext.tsx          # Global user & companion state
-│   ├── i18n/                        # 🌍 Internationalization setup
-│   │   ├── config.ts                # i18n configuration
+│   │   └── UserContext.tsx          # Global state
+│   ├── i18n/
+│   │   ├── config.ts
 │   │   └── locales/
-│   │       ├── en.json              # English translations
-│   │       ├── fr.json              # French translations
-│   │       ├── es.json              # Spanish translations
-│   │       ├── de.json              # German translations
-│   │       └── ar.json              # Arabic with RTL
+│   │       ├── en.json
+│   │       ├── fr.json
+│   │       ├── es.json
+│   │       ├── de.json
+│   │       └── ar.json
 │   ├── pages/
 │   │   ├── AuthPage.tsx             # Login/signup
-│   │   ├── OnboardingPage.tsx       # Animal creation
-│   │   ├── DashboardPage.tsx        # Main hub with 2x2 grid
-│   │   ├── LearningPage.tsx         # Study sessions + document upload
-│   │   └── QuizPage.tsx             # AI question generation
-│   └── utils/
-│       ├── profileService.ts        # Database operations
-│       └── supabaseClient.ts        # Supabase setup
+│   │   ├── DashboardPage.tsx        # Main hub
+│   │   ├── LearningPage.tsx         # Study sessions
+│   │   ├── OnboardingPage.tsx       # Companion creation
+│   │   ├── QuizPage.tsx             # Quiz interface
+│   │   ├── QuizThemesPage.tsx       # Themed quizzes
+│   │   └── WolframCompanionPage.tsx # Wolfram queries
+│   ├── utils/
+│   │   ├── profileService.ts
+│   │   └── supabaseClient.ts
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── index.css
+├── supabase_schema.sql
 ├── package.json
-├── README.md
-└── supabase_schema.sql               # Database setup SQL
+└── README.md
 ```
-```
-
 
 ---
-## 4. Prerequisites
 
-- **Node.js**: v18+ recommended (your machine is already using a recent Node).
-- **npm**: v8+.
-- A **Mistral API key** (for quiz generation): `MISTRAL_API_KEY`.
+## 🚀 Quick Start
 
-You do **not** need to install packages one by one. One `npm install` in the frontend and one in the backend will install everything.
+### Prerequisites
+- Node.js v18+
+- npm v8+
+- Mistral API key (get from https://mistral.ai)
+- Supabase account (free tier at https://supabase.com)
+- Wolfram API Key (get from )
 
-
----
-## 5. Environment configuration (ready-to-use templates)
-
-### Backend `.env`
-
-In `backend/`, create a file called `.env` based on `backend/.env.example`:
-
-```env
-# backend/.env
-PORT=4000
-FRONTEND_ORIGIN=http://localhost:3000
-MISTRAL_API_KEY=YOUR_MISTRAL_API_KEY_HERE
-```
-
-- `PORT` – port for the backend API server.
-- `FRONTEND_ORIGIN` – allowed origin for CORS (the React dev server).
-- `MISTRAL_API_KEY` – your secret key from Mistral (get one at https://mistral.ai).
-
-### Frontend `.env` (for Supabase authentication)
-
-In the project root, create a file called `.env` based on `.env.example`:
-
-```env
-# .env (project root)
-REACT_APP_SUPABASE_URL=YOUR_SUPABASE_URL_HERE
-REACT_APP_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY_HERE
-```
-
-- `REACT_APP_SUPABASE_URL` – your Supabase project URL (e.g. `https://xxxx.supabase.co`).
-- `REACT_APP_SUPABASE_ANON_KEY` – your Supabase public/anon key.
-
-**How to get Supabase credentials:**
-
-1. Go to https://supabase.com and create a free account + project.
-2. In your Supabase dashboard → **Settings** → **API**:
-   - Copy **Project URL** → use it as `REACT_APP_SUPABASE_URL`.
-   - Copy **anon public** key → use it as `REACT_APP_SUPABASE_ANON_KEY`.
-3. **(Important)** Disable email confirmation for instant signup:
-   - Go to **Authentication** → **Providers** → Click on **Email**.
-   - Turn **OFF** the "Confirm email" toggle.
-   - Save changes.
-   - Now users can sign up and log in immediately without email verification (perfect for demos!).
-
-4. **Create the database table for companion profiles**:
-   - In your Supabase dashboard → **SQL Editor**.
-   - Open the file `supabase_schema.sql` from the project root.
-   - Copy and paste the entire SQL script into the SQL Editor.
-   - Click **Run** to create the `companion_profiles` table with all necessary policies and triggers.
-   - This table stores: user name, companion type/name/color, XP, level, and timestamps.
-
-> Tip: Never commit `.env` files. They're already in `.gitignore`.
-
-### 🧪 Test User for Demo/Development
-
-To quickly test the app with pre-populated data, you can create a demo user:
-
-**Test Credentials:**
-```
-Email: demo@csgirlies.com
-Password: DemoPass123!
-```
-
-**Setup Instructions:**
-
-1. **Create the test user in Supabase Auth:**
-   - Go to your Supabase dashboard → **Authentication** → **Users**
-   - Click "Add user" (or "Invite user")
-   - Enter email: `demo@csgirlies.com`
-   - Set password: `DemoPass123!`
-   - Confirm and note the generated `user_id` (UUID)
-
-2. **Add mock profile data:**
-   - Go to **SQL Editor** in Supabase
-   - Open `supabase_schema.sql` from your project
-   - Find the commented INSERT statement at the bottom
-   - Replace `'YOUR-USER-ID-HERE'` with the actual UUID from step 1
-   - Uncomment the INSERT statement and run it
-
-**What the demo user has:**
-- **Name**: Demo Student
-- **Companion**: Purple fox named "Nova" 🦊
-- **Level**: Adolescent (150 XP)
-- **Streaks**: 5-day current streak, 7-day max
-- **Study Data**: 125 minutes total, 12 completed Pomodoro cycles
-- **Perfect for testing**: Analytics, streaks, and all features!
-
-This allows you to immediately see a fully populated profile without going through onboarding.
-
-
----
-## 6. How to run the app (step by step)
-
-You only need to install dependencies **once** per folder.
-
-### Step 1 – Clone the repo
-
+### 1. Clone Repository
 ```bash
 git clone git@github.com:CSGIRLIES/hackathon-edugame-frontend.git
 cd hackathon-edugame-frontend
 ```
 
-### Step 2 – Install frontend dependencies
-
+### 2. Install Dependencies
 ```bash
+# Frontend
 npm install
-```
 
-This reads `package.json` and installs all needed packages into `node_modules/`. You don’t have to worry about individual libraries.
-
-### Step 3 – Install backend dependencies
-
-```bash
+# Backend
 cd backend
 npm install
 cd ..
 ```
 
-Same idea: one command, all backend packages are installed.
+### 3. Configure Environment
 
-### Step 4 – Configure backend environment
-
-1. Copy the example file:
-   ```bash
-   cd backend
-   cp .env.example .env
-   ```
-2. Edit `backend/.env` and set your real values:
-   ```env
-   PORT=4000
-   FRONTEND_ORIGIN=http://localhost:3000
-   MISTRAL_API_KEY=sk-...  # paste your Mistral API key
-   ```
-3. Go back to the project root:
-   ```bash
-   cd ..
-   ```
-
-### Step 5 – Start the backend server
-
-In a terminal:
-
-```bash
-cd backend
-npm start
+**Backend `.env`** (in `backend/` folder):
+```env
+PORT=4000
+FRONTEND_ORIGIN=http://localhost:3000
+MISTRAL_API_KEY=your_mistral_key_here
+WOLFRAM_APP_ID=your_wolfram_id_here
 ```
 
-You should see:
-
-```text
-[Backend] Server listening on port 4000
+**Frontend `.env`** (in project root):
+```env
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-The quiz API is now available at `http://localhost:4000/api/quiz/from-text`.
+### 4. Setup Database
 
-### **Simplified Development Setup**
+1. Go to Supabase Dashboard → SQL Editor
+2. Copy contents of `supabase_schema.sql`
+3. Paste and run to create tables
+4. Disable email confirmation: Authentication → Providers → Email → Turn OFF "Confirm email"
 
-**NEW: One-command development experience!**
+### 5. Create Demo User (Optional)
 
-From the project root, run:
+**Credentials:** `demo@csgirlies.com` / `DemoPass123!`
 
+1. Supabase → Authentication → Users → Add user
+2. Enter credentials above
+3. Copy the generated `user_id` (UUID)
+4. In SQL Editor, find commented INSERT in `supabase_schema.sql`
+5. Replace `'YOUR-USER-ID-HERE'` with actual UUID
+6. Uncomment and run the INSERT statement
+
+**Demo profile includes:**
+- 150 XP (Adolescent level)
+- Purple fox named "Nova" 🦊
+- 5-day streak (max 7 days)
+- 125 minutes study time
+- 12 completed cycles
+
+### 6. Run Application
+
+**One command (recommended):**
 ```bash
 npm run dev
 ```
 
-This starts **both frontend and backend** simultaneously using concurrently! ✨
-
-**Alternatively, run separately:**
-
+**Or run separately:**
 ```bash
 # Terminal 1 - Backend
-npm run dev:backend    # or: cd backend && npm start
+npm run dev:backend
 
-# Terminal 2 - Frontend  
-npm run dev:frontend   # or: npm start
+# Terminal 2 - Frontend
+npm run dev:frontend
 ```
 
-This will compile the React app and open it on `http://localhost:3000`.
-
----
-## 7. Using the app – Step-by-step UX
-
-1. **Open the app**
-   - Go to `http://localhost:3000`.
-
-2. **Sign Up**
-   - On the first screen, choose *Créer un compte* and fill in email & password.
-   - With Supabase configured, this creates a real user account.
-   - Without Supabase env vars, you'll see an error message (auth won't work).
-
-3. **Onboarding**
-   - Step 1: Enter your name/pseudo.
-   - Step 2: Choose your animal (e.g. *Chaton ailé*).
-   - Step 3: Choose color (e.g. *Violet magique*).
-   - Step 4: Name your companion.
-
-4. **Dashboard**
-   - See your companion, XP, and level.
-   - Use buttons:
-     - **Commencer une session d’apprentissage** – to open the Learning page.
-     - **Faire un quiz rapide** – to open the Quiz page.
-
-5. **Learning session**
-   - Describe what you’ll study (e.g. *Les équations du premier degré*).
-   - Keep Pomodoro checked (25 min focus / 5 min break), or disable if needed.
-   - Start the session; timer runs.
-   - When the timer ends, you get XP and are sent to the quiz.
-
-6. **Quiz with AI**
-   - On the **Quiz** page you can also start directly by entering a topic, even without a timer.
-   - Click **Générer des questions**:
-     - Frontend calls `POST http://localhost:4000/api/quiz/from-text` with your topic.
-     - Backend uses Mistral to generate questions.
-   - Answer each question – you gain XP for each correct answer.
-   - At the end, you’re returned to the dashboard and see your XP/level updated.
-
-7. **Companion behavior**
-   - Dashboard: sends motivational messages.
-   - Learning: encourages focus while the timer runs.
-   - After focus / during breaks: reminds you to move, drink water.
-   - Quiz: encourages you not to panic and to think.
+Open http://localhost:3000 🎉
 
 ---
 
-## 🌍 Using Multi-Language Support
+## 📖 User Guide
 
-CSGIRLIES supports 5 languages to make learning accessible worldwide:
+### Getting Started
+1. **Sign Up**: Create account with email/password
+2. **Onboarding**:
+   - Enter your name
+   - Choose companion (fox or puppy)
+   - Select aura color
+   - Name your companion
+3. **Dashboard**: See companion, XP, and available activities
 
-### **Changing Languages:**
-1. **Language selector**: Look for the dropdown in the top-right corner with flag icons
-2. **Choose your language**: Click any language (🇬🇧 🇫🇷 🇪🇸 🇩🇪 🇸🇦)
-3. **Instant change**: The entire app switches language immediately
-4. **Persistent choice**: Your choice is saved and restored when you reopen the app
+### Study Sessions
+1. Click "Start Learning Session"
+2. Enter what you're studying
+3. (Optional) Upload study materials (PDF/DOCX)
+4. (Optional) Generate AI study plan with available time
+5. Start session - timer begins 25-minute cycle
+6. Complete objectives during focus time
+7. Take 5-minute break when prompted
+8. Repeat for multiple cycles
+9. Earn +25 XP per cycle
 
-### **Special Features:**
-- **Arabic RTL Layout**: When selecting Arabic 🇸🇦, the entire app switches to right-to-left layout
-- **Complete Translation**: Every button, message, and feature is translated
-- **Context-aware Content**: Animal names and messages adapt to the selected language
+### Taking Quizzes
+1. Click "Quick Quiz" or finish a study session
+2. Enter topic or choose themed quiz
+3. AI generates 3 questions
+4. Answer multiple choice questions
+5. Earn +20 XP per correct answer (60 XP max)
+6. Return to dashboard with updated XP
 
-### **Supported Languages:**
-- **English 🇬🇧**: Default language
-- **French 🇫🇷**: Complete translation (including regional expressions)
-- **Spanish 🇪🇸**: Academic and educational terminology
-- **German 🇩🇪**: Formal educational language
-- **Arabic 🇸🇦**: RTL layout with Arabic educational terms
+### Feeding Your Companion
+1. Navigate to food shop (dashboard)
+2. View available food items for your companion type
+3. Purchase food with earned XP:
+   - Regular food: 5 XP (available anytime)
+   - Special treats: 10 XP (unlocked at adolescent level)
+4. Feed your companion and receive bonus XP
+5. Watch the feeding animation with visual feedback
 
-### **Adding More Languages:**
-The i18n system is easily extensible. To add a new language:
-1. Create `src/i18n/locales/[lang].json` following the existing structure
-2. Add the language to `src/i18n/config.ts`
-3. Add the flag to `LanguageSelector.tsx`
+### Themed Quizzes
+1. Navigate to "Quiz Themes"
+2. Select subject (Math, Science, History, etc.)
+3. Choose difficulty (Beginner, Intermediate, Advanced, Pro)
+4. Pick specific topic from available quizzes
+5. AI generates curriculum-aligned questions
 
-**All translations are professionally localized for educational contexts!**
+### Maintaining Streaks
+- Study at least once per day
+- Your companion stays "hydrated" 💧
+- Miss a day → streak resets to 0
+- Track personal best streak record
 
+### Changing Language
+- Click language selector (top-right)
+- Choose from 5 languages
+- Entire app switches instantly
+- Selection persists across sessions
 
 ---
-## 8. Notes & Next Steps
 
-### Current state
+## 🧪 Testing
 
-- **🔥 NEW: Visual Streaks System** - Fire emoji progression, personal records, dashboard integration
-- **👨‍👩‍👧‍👦 NEW: Parent Controls** - Email linking, study goals, total time tracking
-- **📊 NEW: Social Leaderboards** - XP/streak visibility, friend connections ready
+### Demo User
+Use `demo@csgirlies.com` / `DemoPass123!` to test with pre-populated data.
 
-- Authentication uses **Supabase** (real user accounts with email/password).
-- **Companion profiles are persisted** to Supabase database with enhanced tracking:
-  - Name, animal type, color, XP, level, study streaks, parent email, goals, total time
-  - All data syncs automatically – profiles persist across sessions!
-- **AI quiz generation** works with any topic (powered by Mistral).
-- **Document upload & study plan generation** - Fully functional AI-powered features!
-  - Upload PDFs/DOCX, AI processes and generates custom study plans
-  - Visual 2x2 dashboard with companion, streaks, study sessions, and social features
+### Feature Testing Checklist
+- [ ] Sign up new account
+- [ ] Complete onboarding flow
+- [ ] Start 25-minute Pomodoro session
+- [ ] Take AI-generated quiz
+- [ ] Upload study document
+- [ ] Generate AI study plan
+- [ ] Execute multi-cycle study plan
+- [ ] Try themed quiz
+- [ ] Check analytics dashboard
+- [ ] Test streak system
+- [ ] Switch languages
+- [ ] Verify XP and level updates
+- [ ] Hear sound effects
+- [ ] Test on different browsers
 
-### What's Ready for Production
+---
 
-✅ **Multi-Language**: 5 languages (EN, FR, ES, DE, AR) with instant switching
-✅ **Gamification**: XP, levels, visual animal evolution, streaks
-✅ **AI Features**: Quiz generation, document analysis, study planning
-✅ **Parent Oversight**: Email linking, time tracking, goal setting
-✅ **Developer Experience**: `npm run dev` runs both frontend + backend
-✅ **Persistence**: All data saved to Supabase with real-time sync
+## 👥 Team PawPatrol
 
-### Remaining Future Extensions (Optional)
+This project was built by **Team PawPatrol** as a gamified educational platform to make learning fun and engaging through companion-based motivation!
 
-- Parent monitoring dashboard (currently foundation exists)
-- Advanced social features (leaderboard UI fully ready)
-- Mobile-responsive design refinements
-- Additional language support (easy to add)
+---
+
+## 📄 License
+
+This project is part of the CSGIRLIES  hackathon submission.
+
+---
+
+## 🤖 Development Credits
+
+**AI-Powered Development:**
+The application was primarily developed using Cline, powered by **anthropic/claude-sonnet-3.5** and **openai/gpt-4o**, with extensive debugging and fine-tuning by the CS Girlies team at PawPatrol.
+
+## 🙏 Acknowledgments
+
+- **Mistral AI** for open-source LLM
+- **Wolfram Alpha** for mathematical computations
+- **CLINE** for access credits to their premium models
+- **Supabase** for backend infrastructure
+- **React** team for excellent framework
+- All open-source contributors!
