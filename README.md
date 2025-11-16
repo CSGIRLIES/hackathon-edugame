@@ -45,9 +45,11 @@ AI-generated quiz content may have inaccuracies or errors. The open-source model
 - Omit correct answer options from the choices
 - Incorrectly evaluate answers as right or wrong
 - Generate misleading or inaccurate explanations
-Users should always verify important information and use quizzes as practice tools rather than definitive assessments.
+<br />
+
+
 - **Wolfram Integration**: Get detailed mathematical explanations for quiz questions
-- **Themed Quizzes**: Pre-made quiz themes across subjects:
+- **Themed Quizzes**: Pre-made AI-generated quiz themes across subjects:
   - Mathematics (Algebra, Geometry, Calculus)
   - Sciences (Biology, Chemistry, Physics)
   - History (Ancient civilizations, Medieval period, Modern era)
@@ -70,7 +72,7 @@ Users should always verify important information and use quizzes as practice too
 - **Visual Evolution**: Companion orb size and glow intensity increase with level
 
 ### 💧 Hydration Streaks
-- **Water-Themed Motivation**: 💧 symbols instead of fire (avoiding Snapchat resemblance)
+- **Water-Themed Motivation**: 💧 symbols 
 - **Streak Tracking**: Study daily to keep your companion hydrated
 - **Personal Records**: Track your max streak achievement
 - **Dynamic Messages**:
@@ -104,13 +106,7 @@ Users should always verify important information and use quizzes as practice too
 - **Session Management**: Automatic login restoration
 
 ### 🎨 Beautiful UI/UX
-- **Glassmorphic Design**: Modern card-based interface
-- **Dark Theme**: Violet gradient with subtle animations
-- **Animated Companion Orb**: Glowing, pulsing visual feedback
-- **Progress Bars**: Clear visual indicators for timers and XP
-- **Responsive Modals**: Study plan and completion popups
-- **Sound Effects**: Audio feedback for cycle completions
-- **Smooth Transitions**: Polished animations throughout
+- ADD DESCRIPTION
 
 ### 📚 Document Processing
 - **File Upload**: Support for PDF, DOCX, and images
@@ -415,7 +411,9 @@ This project is part of the CSGIRLIES  hackathon submission.
 ## 🤖 Development Credits
 
 **AI-Powered Development:**
-The application was primarily developed using Cline, powered by **anthropic/claude-sonnet-3.5** and **openai/gpt-4o**, with extensive debugging and fine-tuning by the CS Girlies team at PawPatrol.
+The application was primarily developed using Cline, powered by **anthropic/claude-sonnet-3.5** and **openai/gpt-4o**, with extensive debugging and fine-tuning by the girlies at PawTeam 🐾❤️
+
+---
 
 ## 🙏 Acknowledgments
 
