@@ -7,7 +7,7 @@ interface AnimalProps {
   color: string;
   level: 'baby' | 'adolescent' | 'adult' | string;
   xp?: number;
-  context?: 'dashboard' | 'learning' | 'break' | 'quiz';
+  context?: 'dashboard' | 'learning' | 'break' | 'quiz' | 'onboarding';
   onFoodClick?: (food: string, cost: number) => void;
 }
 
@@ -21,6 +21,7 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
   const [facing, setFacing] = useState<'left' | 'right'>('right');
   const [currentFrame, setCurrentFrame] = useState(0);
   const [showFoodMenu, setShowFoodMenu] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Get available food items for this animal
   const availableFoods = useMemo(() => {
@@ -53,6 +54,8 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
         return t('animal.contextBreak', { returnObjects: true }) as string[];
       case 'quiz':
         return t('animal.contextQuiz', { returnObjects: true }) as string[];
+      case 'onboarding':
+        return t('animal.contextOnboarding', { returnObjects: true }) as string[];
       case 'dashboard':
       default:
         return t('animal.contextDashboard', { returnObjects: true }) as string[];
@@ -222,24 +225,26 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
     <div className="animal-container">
       <div className="animal-name">
         Compagnon • {level}
-        <button
-          className="animal-food-bubble"
-          onClick={handleFoodBubbleClick}
-          style={{
-            border: 'none',
-            background: 'transparent',
-            cursor: 'pointer',
-            fontSize: '1.25rem',
-            padding: '0.25rem',
-            borderRadius: '50%',
-            transition: 'background-color 0.2s',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-          title="Nourrir votre compagnon"
-        >
-          {foodEmoji}
-        </button>
+        {context !== 'onboarding' && (
+          <button
+            className="animal-food-bubble"
+            onClick={handleFoodBubbleClick}
+            style={{
+              border: 'none',
+              background: 'transparent',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              padding: '0.25rem',
+              borderRadius: '50%',
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            title="Nourrir votre compagnon"
+          >
+            {foodEmoji}
+          </button>
+        )}
       </div>
 
       {showFoodMenu && (

@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../contexts/UserContext.tsx';
 import { supabase } from '../utils/supabaseClient.ts';
 import { createProfile } from '../utils/profileService.ts';
+import Animal from '../components/Animal.tsx';
 
 const OnboardingPage: React.FC = () => {
   const { t } = useTranslation();
   const [step, setStep] = useState(0);
-  const [animalType, setAnimalType] = useState('');
-  const [animalColor, setAnimalColor] = useState('');
+  const [animalType, setAnimalType] = useState('cat'); // Default to cat for preview
+  const [animalColor, setAnimalColor] = useState('#38bdf8'); // Default blue for preview
   const [animalName, setAnimalName] = useState('');
   const [userName, setUserName] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [celebratingStep, setCelebratingStep] = useState<number | null>(null);
   const navigate = useNavigate();
   const { setUser } = useUser();
 
@@ -29,18 +32,36 @@ const OnboardingPage: React.FC = () => {
     { id: '#22c55e', label: t('onboarding.colorGreen') },
   ];
 
+  // Keyboard navigation handler
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && canContinue) {
+      handleNext();
+    } else if (e.key === 'Escape' && step > 0) {
+      handleBack();
+    }
+  };
+
   const handleNext = async () => {
+    // Celebrate completion of current step
+    setCelebratingStep(step);
+    setTimeout(() => setCelebratingStep(null), 1000);
+
     if (step < 3) {
-      setStep(step + 1);
+      // Small delay for celebration effect
+      setTimeout(() => setStep(step + 1), 300);
     } else {
+      setIsSaving(true);
+
       if (!supabase) {
         alert(t('onboarding.noSupabase'));
+        setIsSaving(false);
         return;
       }
 
       const { data: { user: authUser } } = await supabase.auth.getUser();
       if (!authUser) {
         alert(t('onboarding.noUser'));
+        setIsSaving(false);
         navigate('/');
         return;
       }
@@ -71,11 +92,11 @@ const OnboardingPage: React.FC = () => {
         level: 'baby',
         current_streak: 0,
         max_streak: 0,
-        last_study_date: null,
-        parent_email: null,
         study_goal_minutes: 0,
         total_study_time: 0,
       });
+
+      setIsSaving(false);
 
       if (!success) {
         alert(t('onboarding.profileSaveFailed'));
@@ -112,7 +133,7 @@ const OnboardingPage: React.FC = () => {
   ];
 
   return (
-    <div className="page">
+    <div className="page" onKeyDown={handleKeyDown} tabIndex={0}>
       <header className="page-header">
         <h1 className="page-title">{t('onboarding.title')}</h1>
         <p className="page-subtitle">
@@ -120,8 +141,13 @@ const OnboardingPage: React.FC = () => {
         </p>
       </header>
 
-      <main>
-        <section className="card onboarding-card">
+      <main className="layout-grid">
+        <section
+          className={`card onboarding-card ${celebratingStep !== null ? 'celebration-shake' : ''}`}
+          style={{
+            animation: celebratingStep !== null ? 'celebration-bounce 0.6s ease' : undefined,
+          }}
+        >
           <div className="card-header">
             <h2 className="card-title">{stepTitles[step]}</h2>
             <p className="card-subtitle">{stepSubtitles[step]}</p>
@@ -157,9 +183,16 @@ const OnboardingPage: React.FC = () => {
                     key={animal.id}
                     type="button"
                     className={
-                      'chip' + (animalType === animal.id ? ' chip--selected' : '')
+                      'chip' +
+                      (animalType === animal.id ? ' chip--selected' : '') +
+                      (celebratingStep === 1 && animalType === animal.id ? ' celebration-bounce' : '')
                     }
                     onClick={() => setAnimalType(animal.id)}
+                    style={{
+                      animation: celebratingStep === 1 && animalType === animal.id
+                        ? 'pulse-celebration 1s ease'
+                        : undefined,
+                    }}
                   >
                     <div style={{ fontWeight: 600 }}>{animal.label}</div>
                     <div style={{ fontSize: '0.75rem', opacity: 0.8 }}>{animal.hint}</div>
@@ -179,7 +212,11 @@ const OnboardingPage: React.FC = () => {
                   <button
                     key={c.id}
                     type="button"
-                    className={'chip' + (animalColor === c.id ? ' chip--selected' : '')}
+                    className={
+                      'chip' +
+                      (animalColor === c.id ? ' chip--selected' : '') +
+                      (celebratingStep === 2 && animalColor === c.id ? ' celebration-bounce' : '')
+                    }
                     onClick={() => setAnimalColor(c.id)}
                     style={{
                       borderColor: animalColor === c.id ? 'transparent' : undefined,
@@ -187,6 +224,9 @@ const OnboardingPage: React.FC = () => {
                         animalColor === c.id
                           ? `linear-gradient(135deg, ${c.id}, #f472b6)`
                           : undefined,
+                      animation: celebratingStep === 2 && animalColor === c.id
+                        ? 'pulse-celebration 1s ease'
+                        : undefined,
                     }}
                   >
                     <span
@@ -220,6 +260,9 @@ const OnboardingPage: React.FC = () => {
                   onChange={(e) => setAnimalName(e.target.value)}
                   placeholder={t('onboarding.animalNamePlaceholder')}
                   required
+                  style={{
+                    animation: celebratingStep === 3 ? 'fade-in-up 0.8s ease' : undefined,
+                  }}
                 />
               </div>
             </>
@@ -235,12 +278,32 @@ const OnboardingPage: React.FC = () => {
               type="button"
               className="btn btn-primary"
               onClick={handleNext}
-              disabled={!canContinue}
+              disabled={!canContinue || isSaving}
+              style={{
+                animation: isSaving ? 'pulse-soft 1s ease-in-out infinite' : undefined,
+              }}
             >
-              {step === 3 ? t('onboarding.finish') : t('onboarding.continue')}
+              {isSaving
+                ? 'Creating your companion...'
+                : step === 3
+                ? t('onboarding.finish')
+                : t('onboarding.continue')
+              }
             </button>
           </div>
         </section>
+
+        {/* Animal Preview - shown from step 1 onwards */}
+        {step > 0 && (
+          <section className="card">
+            <Animal
+              type={animalType}
+              color={animalColor}
+              level="baby"
+              context="onboarding"
+            />
+          </section>
+        )}
       </main>
     </div>
   );

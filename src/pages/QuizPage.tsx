@@ -55,12 +55,45 @@ const buildWolframInput = (questionText: string): string => {
     return expr;
   }
 
+  // Cas 3 : question de type "Quelle est la somme de 4 et 7 ?"
+  const sumMatch = questionText.match(/(?:somme|addition|plus)\s+de\s+(\d+(?:\.\d+)?)\s+(?:et|plus|aussi)\s+(\d+(?:\.\d+)?)/i);
+  if (sumMatch) {
+    const num1 = sumMatch[1];
+    const num2 = sumMatch[2];
+    return `${num1} + ${num2}`;
+  }
+
+  // Cas 4 : soustraction/différence
+  const diffMatch = questionText.match(/(?:différence|soustraction|moins)\s+de\s+(\d+(?:\.\d+)?)\s+(?:et|moins)\s+(\d+(?:\.\d+)?)/i);
+  if (diffMatch) {
+    const num1 = diffMatch[1];
+    const num2 = diffMatch[2];
+    return `${num1} - ${num2}`;
+  }
+
+  // Cas 5 : produit/multiplication
+  const productMatch = questionText.match(/(?:produit|multiplication|fois)\s+de\s+(\d+(?:\.\d+)?)\s+(?:et|fois|par)\s+(\d+(?:\.\d+)?)/i);
+  if (productMatch) {
+    const num1 = productMatch[1];
+    const num2 = productMatch[2];
+    return `${num1} * ${num2}`;
+  }
+
+  // Cas 6 : quotient/division
+  const quotientMatch = questionText.match(/(?:quotient|division)(?:\s+de)?\s+(\d+(?:\.\d+)?)\s+(?:par|divisé\s+par)\s+(\d+(?:\.\d+)?)/i);
+  if (quotientMatch) {
+    const num1 = quotientMatch[1];
+    const num2 = quotientMatch[2];
+    return `${num1} / ${num2}`;
+  }
+
   // Par défaut, on renvoie le texte original
   return questionText;
 };
 
 const QuizPage: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const [topic, setTopic] = useState('');
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -68,9 +101,26 @@ const QuizPage: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [wolframHistory, setWolframHistory] = useState<WolframHistoryEntry[]>([]);
+  const [wolframError, setWolframError] = useState<string | null>(null);
+  const [wolframLoading, setWolframLoading] = useState(false);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
 
   const { updateXP } = useUser();
   const navigate = useNavigate();
+
+  // Check for themed quiz data on mount
+  useEffect(() => {
+    if (location.state?.themedQuiz && location.state.questions) {
+      setQuestions(location.state.questions);
+      setStarted(true);
+      setScore(0);
+      setCurrentQuestion(0);
+      setWolframHistory([]);
+      setWolframError(null);
+    }
+  }, [location.state]);
 
   const handleStartQuiz = async () => {
     const trimmed = topic.trim();

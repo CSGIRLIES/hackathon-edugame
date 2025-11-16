@@ -153,6 +153,12 @@
       "You know this, trust yourself!",
       "Take your time, no rush!",
       "Every answer teaches you something!"
+    ],
+    "contextOnboarding": [
+      "I'm excited to meet you! ✨",
+      "That color looks perfect! 🌈",
+      "What a great name choice! 🎉",
+      "Almost ready! Let's be companions! 💜"
     ]
   },
   "streaks": {

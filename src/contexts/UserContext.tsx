@@ -27,12 +27,9 @@ interface UserContextType {
   user: User | null;
   setUser: (user: User | null) => void;
   updateXP: (xp: number) => void;
-<<<<<<< HEAD
   subtractXP: (xp: number) => Promise<boolean>;
-=======
   updateStreak: () => Promise<void>;
   checkStreakExpiry: () => Promise<void>;
->>>>>>> brancheKawthar
   startLearningSession: (topic: string, duration: number) => void;
 }
 
@@ -72,7 +69,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-<<<<<<< HEAD
   const subtractXP = async (xp: number): Promise<boolean> => {
     if (!user || user.xp < xp) {
       return false;
@@ -98,7 +94,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
 
     return true;
-=======
+  };
+
   const updateStreak = async () => {
     if (!user) return;
 
@@ -180,7 +177,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         current_streak: 0,
       });
     }
->>>>>>> brancheKawthar
   };
 
   const startLearningSession = (topic: string, duration: number) => {
@@ -193,11 +189,17 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-<<<<<<< HEAD
-    <UserContext.Provider value={{ user, setUser, updateXP, subtractXP, startLearningSession }}>
-=======
-    <UserContext.Provider value={{ user, setUser, updateXP, updateStreak, checkStreakExpiry, startLearningSession }}>
->>>>>>> brancheKawthar
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        updateXP,
+        subtractXP,
+        updateStreak,
+        checkStreakExpiry,
+        startLearningSession,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

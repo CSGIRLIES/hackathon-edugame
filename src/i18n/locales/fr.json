@@ -149,10 +149,16 @@
       "Petite pause - tu la mérites !"
     ],
     "contextQuiz": [
-      "Pas de panique, réfléchis calmement 🤔",
-      "Tu sais ça, fais-toi confiance !",
-      "Prends ton temps, pas de précipitation !",
+      "N'aie pas peur, réfléchis calmement 🤔",
+      "Tu le sais, crois en toi !",
+      "Prends ton temps, pas de rush !",
       "Chaque réponse t'apprend quelque chose !"
+    ],
+    "contextOnboarding": [
+      "Je suis si excited de te rencontrer ! ✨",
+      "Cette couleur te va parfaitement ! 🌈",
+      "Quel beau choix de nom ! 🎉",
+      "Presque prêts ! Devenons compagnons ! 💜"
     ]
   },
   "streaks": {
