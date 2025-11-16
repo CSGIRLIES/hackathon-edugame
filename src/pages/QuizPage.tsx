@@ -215,20 +215,21 @@ const QuizPage: React.FC = () => {
     const current = questions[currentQuestion];
     const isCorrect = index === current.correct;
 
-    // Calculate the new score
-    const newScore = isCorrect ? score + 20 : score;
+    setScore((prevScore) => {
+      const updatedScore = isCorrect ? prevScore + 20 : prevScore;
 
-    if (currentQuestion < questions.length - 1) {
-      // Not the last question, just update score and move to next
-      setScore(newScore);
-      setCurrentQuestion((prev) => prev + 1);
-    } else {
-      // Last question, update score and show completion modal
-      setScore(newScore);
-      updateXP(newScore);
-      setFinalScore(newScore);
-      setShowCompletionModal(true);
-    }
+      if (currentQuestion < questions.length - 1) {
+        // Not the last question, just move to the next one
+        setCurrentQuestion((prev) => prev + 1);
+      } else {
+        // Last question: award XP once based on final score
+        updateXP(updatedScore);
+        setFinalScore(updatedScore);
+        setShowCompletionModal(true);
+      }
+
+      return updatedScore;
+    });
   };
 
   if (!started) {
