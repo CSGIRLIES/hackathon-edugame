@@ -22,6 +22,7 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
   const [currentFrame, setCurrentFrame] = useState(0);
   const [showFoodMenu, setShowFoodMenu] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [canPlaySound, setCanPlaySound] = useState(false);
 
   // Get available food items for this animal
   const availableFoods = useMemo(() => {
@@ -111,6 +112,25 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
     const cycleMessage = () => {
       // Show the message
       setIsVisible(true);
+
+      // Only try to play sound after at least one user interaction
+      if (canPlaySound) {
+        try {
+          const audio = new Audio('/notification.mp3');
+          audio.volume = 0.3; // keep it subtle
+          audio.play().catch((err) => {
+            if (process.env.NODE_ENV === 'development') {
+              // eslint-disable-next-line no-console
+              console.info('[Animal] Notification sound play blocked:', err);
+            }
+          });
+        } catch (err) {
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.info('[Animal] Notification sound error:', err);
+          }
+        }
+      }
       
       // Hide after SHOW_DURATION
       showTimer = setTimeout(() => {
@@ -131,12 +151,29 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
     };
-  }, [messages.length]);
+  }, [messages.length, canPlaySound]);
 
   useEffect(() => {
     // reset when context changes
     setMessageIndex(0);
   }, [context]);
+
+  // Track whether the user has interacted with the page at least once,
+  // so we know when it's safe to try playing sounds without hitting
+  // browser autoplay restrictions.
+  useEffect(() => {
+    const enableSound = () => setCanPlaySound(true);
+
+    window.addEventListener('click', enableSound, { once: true });
+    window.addEventListener('keydown', enableSound, { once: true });
+    window.addEventListener('touchstart', enableSound, { once: true });
+
+    return () => {
+      window.removeEventListener('click', enableSound);
+      window.removeEventListener('keydown', enableSound);
+      window.removeEventListener('touchstart', enableSound);
+    };
+  }, []);
 
   // Random animation system (only changes animation type, no position movement)
   useEffect(() => {

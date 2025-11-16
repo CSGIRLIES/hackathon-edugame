@@ -9,11 +9,13 @@ import LearningPage from './pages/LearningPage.tsx';
 import WolframCompanionPage from './pages/WolframCompanionPage.tsx';
 import UserHeader from './components/UserHeader.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
+import SoundConsentBanner from './components/SoundConsentBanner.tsx';
 
 function App() {
   return (
     <div className="App">
       <UserHeader />
+      <SoundConsentBanner />
       <ErrorBoundary>
         <Routes>
           <Route path="/" element={<AuthPage />} />

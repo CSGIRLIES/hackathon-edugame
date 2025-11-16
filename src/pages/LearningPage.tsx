@@ -39,6 +39,24 @@ const LearningPage: React.FC = () => {
       const xpGained = 25; // 25 minutes = 25 XP
       updateXP(xpGained);
       updateStreak(); // Update streak when session completes
+
+      // Play completion sound when a Pomodoro cycle finishes
+      try {
+        const audio = new Audio('/completion.mp3');
+        audio.volume = 0.3;
+        audio.play().catch((err) => {
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.info('[LearningPage] Completion sound play blocked:', err);
+          }
+        });
+      } catch (err) {
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.info('[LearningPage] Completion sound error:', err);
+        }
+      }
+
       setSessionXP(xpGained);
       setShowCompletionModal(true);
     }
