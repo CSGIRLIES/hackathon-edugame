@@ -992,3 +992,257 @@ code {
     min-width: 180px;
   }
 }
+
+/* ======================================= */
+/* 🌈 CSGIRLIES LANDING PAGE PASTEL THEME */
+/* ======================================= */
+
+:root {
+  /* Pastel / kawaii palette for landing page */
+  --lp-color-primary: #A3C9F3; /* Bleu ciel doux */
+  --lp-color-secondary: #FFD54F; /* Jaune doré (XP/Énergie) */
+  --lp-color-accent: #81C784; /* Vert menthe (Succès/Action) */
+  --lp-color-background: #FBFDFF; /* Fond général très clair */
+  --lp-color-text: #333333; /* Texte principal sombre */
+  --lp-color-text-muted: #B0B0B0; /* Texte de substitution */
+
+  --lp-shadow-soft: 0 6px 15px rgba(0, 0, 0, 0.08); /* Ombre douce "Animal Crossing" */
+  --lp-radius-large: 16px;
+  --lp-radius-pill: 50px;
+}
+
+/* Variante sombre si le body reçoit la classe .dark-mode */
+body.dark-mode {
+  --lp-color-primary: #1F3F66; /* Bleu foncé pour la clarté */
+  --lp-color-secondary: #FFAB40; /* Orange vif pour l'XP */
+  --lp-color-background: #1A1A2E; /* Fond sombre */
+  --lp-color-text: #F0F0F0; /* Texte clair */
+  --lp-card-background: #242940; /* Cartes légèrement plus claires */
+  --lp-shadow-soft: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* CONTAINER GÉNÉRAL DE LA LANDING */
+.landing-page {
+  min-height: 100vh;
+  background-color: var(--lp-color-background);
+  color: var(--lp-color-text);
+  font-family: 'Poppins', 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER */
+.landing-header {
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landing-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--lp-color-primary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* MAIN LAYOUT */
+.landing-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 3rem 3rem;
+}
+
+.landing-hero {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.landing-hero-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.landing-hero-title {
+  font-size: clamp(2.6rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+
+.landing-hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--lp-color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.landing-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ANIMAL PREVIEW CARD */
+.landing-animal-wrapper {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.landing-animal-card {
+  background-color: #ffffff;
+  border-radius: var(--lp-radius-large);
+  padding: 2.5rem;
+  box-shadow: var(--lp-shadow-soft);
+  border: 4px solid #ffb3d9;
+}
+
+.landing-floating-icon {
+  position: absolute;
+  font-size: 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.landing-floating-icon--top-right {
+  top: -20px;
+  right: -20px;
+}
+
+.landing-floating-icon--bottom-left {
+  bottom: -10px;
+  left: -30px;
+  font-size: 1.6rem;
+}
+
+/* FEATURES */
+.landing-features {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.landing-section-title {
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.landing-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.landing-feature-card {
+  background-color: #ffffff;
+  border-radius: var(--lp-radius-large);
+  padding: 2rem;
+  box-shadow: var(--lp-shadow-soft);
+  border: 3px solid rgba(163, 201, 243, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.landing-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* CTA */
+.landing-cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: #ffffff;
+  border-radius: 30px;
+  margin-bottom: 2rem;
+  box-shadow: var(--lp-shadow-soft);
+  border: 4px solid #ffb3d9;
+}
+
+/* FOOTER */
+.landing-footer {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  text-align: center;
+  border-top: 3px solid #ffb3d9;
+  backdrop-filter: blur(5px);
+}
+
+.landing-footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.landing-footer-text {
+  margin: 0;
+  color: var(--lp-color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* BOUTONS PASTEL (PILL) */
+.landing-btn {
+  border: none;
+  border-radius: var(--lp-radius-pill);
+  padding: 0.9rem 1.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease,
+    background-color 0.2s ease, color 0.2s ease;
+}
+
+.landing-btn-primary {
+  background-color: var(--lp-color-accent);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(129, 199, 132, 0.4);
+}
+
+.landing-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(129, 199, 132, 0.55);
+}
+
+.landing-btn-secondary {
+  background-color: #ffffff;
+  color: var(--lp-color-text);
+  border: 2px solid var(--lp-color-primary);
+  box-shadow: var(--lp-shadow-soft);
+}
+
+.landing-btn-secondary:hover {
+  background-color: var(--lp-color-primary);
+  color: #ffffff;
+}
+
+/* RESPONSIVE LANDING */
+@media (max-width: 900px) {
+  .landing-header {
+    padding-inline: 1.5rem;
+  }
+
+  .landing-main {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .landing-header {
+    padding-inline: 1.25rem;
+  }
+
+  .landing-main {
+    padding-inline: 1.25rem;
+  }
+}

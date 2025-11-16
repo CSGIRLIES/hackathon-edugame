@@ -17,7 +17,7 @@ export const FOOD_ITEMS = {
       id: 'chiot-muffin',
       name: 'Muffin Spécial',
       type: 'special',
-      image: './chiot_muffin.png',
+      image: '/chiot_muffin.png',
       cost: 10,
       xpReward: 5,
       description: 'Nourriture spéciale pour récompenses occasionnelles'
@@ -50,12 +50,30 @@ export const FOOD_ITEMS = {
 };
 
 // Utility functions
+const normalizeAnimalType = (animalType) => {
+  if (!animalType) return null;
+  const key = String(animalType).toLowerCase();
+
+  // Direct match
+  if (FOOD_ITEMS[key]) return key;
+
+  // Common aliases / typos mapping
+  if (['fox', 'renard', 'fantastic', 'fantastique'].includes(key)) return 'af';
+  if (['puppy', 'dog', 'chien', 'chiot'].includes(key)) return 'chiot';
+
+  return null;
+};
+
 export const getFoodItemsForAnimal = (animalType) => {
-  return FOOD_ITEMS[animalType] || {};
+  const normalized = normalizeAnimalType(animalType);
+  if (!normalized) return {};
+  return FOOD_ITEMS[normalized] || {};
 };
 
 export const getFoodItem = (animalType, foodType) => {
-  const animalFoods = getFoodItemsForAnimal(animalType);
+  const normalized = normalizeAnimalType(animalType);
+  if (!normalized) return null;
+  const animalFoods = FOOD_ITEMS[normalized] || {};
   return animalFoods[foodType] || null;
 };
 

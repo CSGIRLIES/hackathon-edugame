@@ -36,6 +36,18 @@ interface UserContextType {
   incrementLearningCycle: () => Promise<void>;
 }
 
+// XP thresholds for companion levels
+const getLevelForXP = (xp: number): User['level'] => {
+  if (xp >= 2000) return 'adult';
+  if (xp >= 1000) return 'adolescent';
+  return 'baby';
+};
+
+const getMaxLevel = (a: User['level'], b: User['level']): User['level'] => {
+  const order: User['level'][] = ['baby', 'adolescent', 'adult'];
+  return order[Math.max(order.indexOf(a), order.indexOf(b))];
+};
+
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const useUser = () => {
@@ -82,22 +94,17 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const updateXP = async (xp: number) => {
     if (user) {
       const newXP = user.xp + xp;
-      let newLevel: 'baby' | 'adolescent' | 'adult';
-      if (newXP < 20) {
-        newLevel = 'baby';
-      } else if (newXP < 60) {
-        newLevel = 'adolescent';
-      } else {
-        newLevel = 'adult';
-      }
+      const computedLevel = getLevelForXP(newXP);
+      // Never downgrade: keep the highest level reached so far
+      const finalLevel = getMaxLevel(user.level, computedLevel);
 
-      const updatedUser = { ...user, xp: newXP, level: newLevel };
+      const updatedUser = { ...user, xp: newXP, level: finalLevel };
       setUser(updatedUser);
 
       // Persist XP and level to Supabase
       await updateProfile(user.id, {
         xp: newXP,
-        level: newLevel,
+        level: finalLevel,
       });
     }
   };
@@ -108,22 +115,17 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
 
     const newXP = user.xp - xp;
-    let newLevel: 'baby' | 'adolescent' | 'adult';
-    if (newXP < 20) {
-      newLevel = 'baby';
-    } else if (newXP < 60) {
-      newLevel = 'adolescent';
-    } else {
-      newLevel = 'adult';
-    }
+    const computedLevel = getLevelForXP(newXP);
+    // Never downgrade: keep the highest level reached so far
+    const finalLevel = getMaxLevel(user.level, computedLevel);
 
-    const updatedUser = { ...user, xp: newXP, level: newLevel };
+    const updatedUser = { ...user, xp: newXP, level: finalLevel };
     setUser(updatedUser);
 
     // Persist XP and level to Supabase
     await updateProfile(user.id, {
       xp: newXP,
-      level: newLevel,
+      level: finalLevel,
     });
 
     return true;

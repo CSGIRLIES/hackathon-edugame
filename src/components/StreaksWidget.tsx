@@ -26,7 +26,20 @@ const StreaksWidget: React.FC = () => {
     return t('streaks.legendary');
   };
 
+  const getNextStreakMilestone = (streak: number) => {
+    if (streak < 1) return 1;
+    if (streak < 3) return 3;
+    if (streak < 7) return 7;
+    if (streak < 14) return 14;
+    if (streak < 30) return 30;
+    return streak; // au-delà de 30, on considère la barre remplie
+  };
+
   const isPersonalRecord = user.currentStreak === user.maxStreak && user.currentStreak > 0;
+  const nextMilestone = getNextStreakMilestone(user.currentStreak);
+  const streakProgress = nextMilestone > 0
+    ? Math.min(100, Math.round((user.currentStreak / nextMilestone) * 100))
+    : 0;
 
   return (
     <section className="card">
@@ -51,6 +64,23 @@ const StreaksWidget: React.FC = () => {
           <div className="streak-label">
             {t('streaks.days')}
           </div>
+
+          {/* Milestone progress bar inside the streak droplet */}
+          {nextMilestone > 0 && (
+            <div style={{ marginTop: '0.75rem', width: '100%' }}>
+              <div style={{ fontSize: '0.75rem', marginBottom: '0.25rem', opacity: 0.8 }}>
+                {user.currentStreak >= nextMilestone
+                  ? t('streaks.milestoneReached', { days: nextMilestone })
+                  : t('streaks.nextMilestone', { current: user.currentStreak, target: nextMilestone })}
+              </div>
+              <div className="progress-track">
+                <div
+                  className="progress-bar"
+                  style={{ width: `${streakProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {user.currentStreak > 0 && (

@@ -329,11 +329,11 @@ const Animal: React.FC<AnimalProps> = ({ type, color, level, xp = 0, context = '
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
                 <img
-                  src={foodData.image}
+                  src={foodData.image || foodData.bowlFullImage || foodData.bowlEmptyImage}
                   alt={foodData.name}
                   style={{
-                    width: '24px',
-                    height: '24px',
+                    width: '32px',
+                    height: '32px',
                     objectFit: 'contain',
                     marginRight: '8px'
                   }}

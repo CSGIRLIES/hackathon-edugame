@@ -145,6 +145,19 @@ const DashboardPage: React.FC = () => {
                 <span>{levelLabel}</span>
               </div>
             </div>
+
+            {/* Progression vers le prochain âge/niveau */}
+            {user.level !== 'adult' && (
+              <p className="helper-text" style={{ marginTop: '0.35rem' }}>
+                {user.level === 'baby' && `${user.xp}/1000 XP pour atteindre le niveau adolescent`}
+                {user.level === 'adolescent' && `${user.xp}/2000 XP pour atteindre le niveau adulte`}
+              </p>
+            )}
+            {user.level === 'adult' && (
+              <p className="helper-text" style={{ marginTop: '0.35rem' }}>
+                Niveau adulte atteint – votre compagnon a atteint son âge maximal.
+              </p>
+            )}
           </section>
 
           <section className="card">
