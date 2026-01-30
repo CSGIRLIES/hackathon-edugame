@@ -1,6 +1,6 @@
-# What we are about
+# PawFriend 
 
-**By PawPatrol**
+**Built by PawPatrol team**
 
 PawFriend is a **multi-language gamified learning app** where you adopt a **magical companion animal** (fox, puppy) that grows and learns with you.
 
@@ -48,8 +48,6 @@ When you study, focus, and answer quizzes correctly, your companion gains XP, le
 * Omit correct answer options from the choices
 * Incorrectly evaluate answers as right or wrong
 *   Generate misleading or inaccurate explanations
-
-    \
 
 * **Wolfram Integration**: Get detailed mathematical explanations for quiz questions
 * **Themed Quizzes**: Pre-made AI-generated quiz themes across subjects:
@@ -111,10 +109,6 @@ When you study, focus, and answer quizzes correctly, your companion gains XP, le
   * Study time and completed cycles
   * Last study date
 * **Session Management**: Automatic login restoration
-
-### 🎨 Beautiful UI/UX
-
-* ADD DESCRIPTION
 
 ### 📚 Document Processing
 
